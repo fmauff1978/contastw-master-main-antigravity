@@ -21,6 +21,7 @@ export class MensalComponent implements OnInit {
   anoant = this.ano - 1;
   anoant2 = this.ano - 2;
   dd = 0;
+  ddPercent = 0;
   mes = new Date().getMonth() + 1;
   log1: Timestamp;
   isLoading = false;
@@ -61,6 +62,7 @@ export class MensalComponent implements OnInit {
 
   async ngOnInit() {
     this.dd = this.ts.diasDecorridos();
+    this.ddPercent = this.dd / 365;
     this.log1 = await this.ts.log();
     this.fonte0 = await this.cs.pegarContasParam(
       'natureza',

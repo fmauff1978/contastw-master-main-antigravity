@@ -1,13 +1,10 @@
 <div class="min-h-screen bg-gray-50/50 py-8 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-7xl mx-auto space-y-6">
+  <div class="w-full space-y-6">
     <div
       class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2"
     >
       <div>
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-indigo-600"
-          >Visão financeira</span
-        >
+       
         <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
           Agregados {{ ano }}
         </h1>
@@ -32,66 +29,21 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <div
-        class="relative overflow-hidden rounded-2xl bg-white p-5 shadow-sm border border-gray-200/80 transition hover:shadow-md"
-      >
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-indigo-600"
-          >Ano atual</span
-        >
-        <div class="mt-2 text-2xl sm:text-3xl font-extrabold text-gray-900">
-          {{ ano }}
-        </div>
-        <p class="mt-2 text-xs text-gray-500">
-          Consolidado mensal em acompanhamento
-        </p>
-      </div>
-      <div
-        class="relative overflow-hidden rounded-2xl bg-white p-5 shadow-sm border border-gray-200/80 transition hover:shadow-md"
-      >
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-emerald-600"
-          >Ano anterior</span
-        >
-        <div class="mt-2 text-2xl sm:text-3xl font-extrabold text-emerald-600">
-          {{ anoant }}
-        </div>
-        <p class="mt-2 text-xs text-gray-500">
-          Base de comparação dos agregados
-        </p>
-      </div>
-      <div
-        class="relative overflow-hidden rounded-2xl bg-white p-5 shadow-sm border border-gray-200/80 transition hover:shadow-md"
-      >
-        <span
-          class="text-xs font-semibold uppercase tracking-wider text-amber-600"
-          >Fontes carregadas</span
-        >
-        <div class="mt-2 text-2xl sm:text-3xl font-extrabold text-amber-600">
-          {{ fonte0.length + fonte1.length + fonte2.length }}
-        </div>
-        <p class="mt-2 text-xs text-gray-500">
-          Registros disponíveis para análise
-        </p>
-      </div>
-    </div>
+   
 
     <section
       class="rounded-2xl bg-white shadow-sm border border-gray-200/80 overflow-hidden"
     >
       <div class="px-5 py-4 border-b border-gray-200/80">
         <h2 class="text-base font-bold text-gray-900">Agregados principais</h2>
-        <p class="mt-1 text-xs text-gray-500">
-          Valores mensais, total anual e comparação com {{ anoant }}
-        </p>
+       
       </div>
       <div class="overflow-x-auto">
-        <table class="w-full divide-y divide-gray-200">
+        <table class="min-w-full w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
               <th
-                class="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 Agregado
               </th>
@@ -273,12 +225,10 @@
     >
       <div class="px-5 py-4 border-b border-gray-200/80">
         <h2 class="text-base font-bold text-gray-900">Múltiplos</h2>
-        <p class="mt-1 text-xs text-gray-500">
-          Indicadores de desempenho dos agregados selecionados
-        </p>
+      
       </div>
       <div class="overflow-x-auto">
-        <table class="w-full divide-y divide-gray-200">
+        <table class="min-w-full w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
               <th
@@ -421,18 +371,16 @@
     >
       <div class="px-5 py-4 border-b border-gray-200/80">
         <h2 class="text-base font-bold text-gray-900">
-          Indicadores complementares
+          Despesas Agregadas
         </h2>
-        <p class="mt-1 text-xs text-gray-500">
-          Acompanhamento mensal e variação percentual anual
-        </p>
+       
       </div>
       <div class="overflow-x-auto">
-        <table class="w-full divide-y divide-gray-200">
+        <table class="min-w-full w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
               <th
-                class="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 Agregado
               </th>

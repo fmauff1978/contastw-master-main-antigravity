@@ -1,11 +1,11 @@
 :host {
   display: block;
-  overflow-x: hidden;
+  width: 100%;
 }
 
 table {
   width: 100%;
-  table-layout: fixed;
+  min-width: 100%;
   font-family: "Roboto Mono", monospace;
   font-size: 0.75rem !important;
 }
@@ -20,8 +20,6 @@ tbody td {
 th,
 td {
   padding: 0.35rem 0.5rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 
 :host table th:last-child,
