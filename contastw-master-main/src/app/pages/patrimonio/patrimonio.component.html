@@ -1,0 +1,183 @@
+<nav class="bg-gray-600 w-full">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-center">
+      <!-- Alterado justify-between para justify-center -->
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="block size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+          <svg
+            class="hidden size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center"
+      >
+      <app-cad-patr
+        [showModalCadPatr]="showModalCadPatr"
+        [item]="selectedItem"
+        (close)="closeModal()"
+        (save)="saveData()"></app-cad-patr>
+        <app-edit-patr
+        [showModalEdit]="showModalEdit"
+        [item]="selectedItem"
+        (close)="closeModal()"
+        (save)="saveData()"></app-edit-patr>
+        <!-- Alterado justify-start para justify-center -->
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              class="bg-gray-600 px-3 py-2 text-sm font-medium text-white"
+              aria-current="page"
+              >Patrimônio</a
+            >
+            <button
+              type="button"
+              (click)="cadastrar()"
+              class="bg-gray-600 px-3 py-2 text-sm font-medium text-white"
+              class="rounded-md bg-gray-900 px-3 py-2 text-xs font-medium text-white"
+              aria-current="page"
+            >
+              Cadastrar Novo Bem
+            </button>
+            <button
+              class="rounded-md px-3 py-2 text-xs font-medium text-gray-300 bg-red-600"
+            >
+              Total: {{ this.somapatr() | currency : "BRL" }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      ></div>
+    </div>
+  </div>
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+      <a
+        href="#"
+        class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+        aria-current="page"
+      ></a>
+      <a
+        href="patr"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Patrimonio</a
+      >
+    </div>
+  </div>
+</nav>
+
+<div class="relative overflow-x-auto">
+  <!-- <app-cad
+    [showModal3]="showModal3"
+    [item]="selectedItem"
+    (close)="closeModal()"
+    (save)="saveData()"></app-cad>
+    <app-edit
+    [showModal4]="showModal4"
+    [item]="selectedItem"
+    (close)="closeModal()"
+    (save)="saveData()"></app-edit> -->
+
+    <div class="mx-auto max-w-screen-md w-full">
+  <table
+    class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-14"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3 text-center align-middle">Bem</th>
+        <th scope="col" class="px-6 py-3">Data da Aquisição</th>
+        <th scope="col" class="px-6 py-3 text-center align-middle">
+          Valor da Compra
+        </th>
+        <th scope="col" class="px-6 py-3 text-center align-middle">
+          Valor Atual
+        </th>
+        <th scope="col" class="px-6 py-3">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+        *ngFor="let item of this.patr()" [ngStyle]="{'background-color': item.valor_atual == 0 ? 'lightgray' : 'white'}"
+      >
+        <td
+          scope="row"
+          class="px-6 py-4 text-center align-middle"
+        >
+          {{ item.nome }}
+        </td>
+        <td class="px-6 py-4">{{item.data_compra?.toDate() | date:"dd/MM/yyyy"}}</td>
+        <td class="px-6 py-4 text-center align-middle">
+          {{ item.valor_aquisicao | currency : "BRL" }}
+        </td>
+        <td class="px-6 py-4 text-center align-middle">
+          {{ item.valor_atual | currency : "BRL" }}
+        </td>
+        <td class="px-6 py-4">
+          <button (click)="editar(item)">
+            <svg
+              class="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

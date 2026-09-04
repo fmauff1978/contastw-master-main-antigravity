@@ -1,0 +1,24 @@
+/* Layout responsivo para bp2 */
+@media (max-width: 1280px) {
+  .w-1\/2 {
+    width: 100% !important;
+  }
+  
+  .flex.justify-center.gap-8 {
+    flex-direction: column;
+  }
+}
+
+/* Estilos para melhorar visualização */
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+/* Suavizar scroll das tabelas */
+div[style*="overflow-y: auto"] {
+  scroll-behavior: smooth;
+}

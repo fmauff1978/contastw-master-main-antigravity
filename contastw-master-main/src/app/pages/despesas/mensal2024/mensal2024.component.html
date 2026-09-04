@@ -1,0 +1,646 @@
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+  >
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+    <nav class="bg-white border-gray-200">
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 font-bold"
+      >
+        <h1
+          class="mb-3 text-lg text-gray-500 md:text-xl dark:text-gray-400 mt-2 mr-10"
+        >
+          Despesas e Receitas 2024 Visão Mensal
+        </h1>
+
+        <ul
+          class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+        >
+          <li>
+            <button
+              class="text-white bg-purple-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
+              Posição Fechada em 31/12/2024
+            </button>
+          </li>
+         
+        </ul>
+      </div>
+    </nav>
+
+    
+
+    <div class="container mt-8 max-w-5xl mx-auto flex justify-center">
+      <table class="min-w-full bg-white border-separate mb-16">
+        <thead class="py-2 px-4  cursor-pointer text-left border-b">
+          <tr>
+            <th
+              class="py-2 px-4 border-b cursor-pointer border-r border-gray-300"
+            >
+              #
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer items-center"
+              (click)="sortTable('cod')"
+            >
+              Código
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer"
+              (click)="sortTable('conta')"
+            >
+              Despesa
+            </th>
+            
+            <th
+              class="py-2 px-4 border-b cursor-pointer"
+              (click)="sortTable('mod_despesa')"
+            >
+              Modalidade
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('jan24')"
+            >
+              Jan
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('fev24')"
+            >
+              Fev
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('mar24')"
+            >
+              Mar
+            </th>
+            <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('abr24')"
+          >
+            Abr
+          </th>
+          <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('mai24')"
+        >
+          Mai
+        </th>
+        <th
+        class="py-2 px-4 border-b cursor-pointer text-center"
+        (click)="sortTable('jun24')"
+      >
+        Jun
+      </th>
+      <th
+      class="py-2 px-4 border-b cursor-pointer text-center"
+      (click)="sortTable('jul24')"
+    >
+      Jul
+    </th>
+    <th
+    class="py-2 px-4 border-b cursor-pointer text-center"
+    (click)="sortTable('ago24')"
+  >
+    Ago
+  </th>
+  <th
+  class="py-2 px-4 border-b cursor-pointer text-center"
+  (click)="sortTable('set24')"
+>
+  Set
+</th>
+<th
+class="py-2 px-4 border-b cursor-pointer text-center"
+(click)="sortTable('out24')"
+>
+Out
+</th>
+<th
+class="py-2 px-4 border-b cursor-pointer text-center"
+(click)="sortTable('nov24')"
+>
+Nov
+</th>
+<th
+class="py-2 px-4 border-b cursor-pointer text-center"
+(click)="sortTable('dez24')"
+>
+Dez
+</th>
+<th
+class="py-2 px-4 border-l cursor-pointer text-center border-b border-gray-300" 
+(click)="sortTable('ano2024.total')"
+>
+Total
+</th>
+<th
+class="py-2 px-4 border-l cursor-pointer text-center border-b border-gray-300" 
+(click)="sortTable('ano2024.total')"
+>
+Versus2023
+</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-sm font-bold bg-gray-100">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            >
+            </td>
+            <td class="py-2 px-4 border-b items-center">Total</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.jan | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.fev | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.mar | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.abr | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.mai | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.jun | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.jul | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.ago | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.set | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.out | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.nov | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisMensais.dez | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b font-bold border-gray-300 text-right">
+              {{ calcularTotalHorizontal(totaisMensais) | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-l border-gray-300 text-right">
+            </td>
+          </tr>
+          <tr class="text-sm italic text-gray-600">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            >
+            </td>
+            <td class="py-2 px-4 border-b items-center">Off</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.jan | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.fev | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.mar | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.abr | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.mai | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.jun | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.jul | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.ago | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.set | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.out | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.nov | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisOff.dez | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-gray-300 text-right">
+              {{ calcularTotalHorizontal(totaisOff) | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-l border-gray-300 text-right">
+            </td>
+          </tr>
+          <tr class="text-sm italic text-gray-600">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            >
+            </td>
+            <td class="py-2 px-4 border-b items-center">Compromissada</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.jan | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.fev | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.mar | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.abr | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.mai | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.jun | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.jul | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.ago | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.set | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.out | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.nov | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisCompromissada.dez | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-gray-300 text-right">
+              {{ calcularTotalHorizontal(totaisCompromissada) | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-l border-gray-300 text-right">
+            </td>
+          </tr>
+          <tr class="text-sm italic text-gray-600">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            >
+            </td>
+            <td class="py-2 px-4 border-b items-center">Gerenciável</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.jan | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.fev | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.mar | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.abr | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.mai | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.jun | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.jul | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.ago | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.set | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.out | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.nov | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisGerenciavel.dez | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-gray-300 text-right">
+              {{ calcularTotalHorizontal(totaisGerenciavel) | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-l border-gray-300 text-right">
+            </td>
+          </tr>
+          <tr class="text-sm font-bold bg-yellow-50">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            >
+            </td>
+            <td class="py-2 px-4 border-b items-center">Despesa Líquida</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.jan | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.fev | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.mar | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.abr | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.mai | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.jun | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.jul | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.ago | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.set | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.out | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.nov | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisDespesaLiquida.dez | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-gray-300 text-right">
+              {{ calcularTotalHorizontal(totaisDespesaLiquida) | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-l border-gray-300 text-right">
+            </td>
+          </tr>
+          <tr
+            *ngFor="let item of fonte0; let i = index" class="text-sm"
+            [ngStyle]="{'background-color': isOlderThanThreshold((item.total2024)/((item.gd2023)*366)) ? 'peachpuff' : 'white'}"
+          
+          >
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300 italic"
+            >
+              {{ i + 1 }}
+            </td>
+            <td class="py-2 px-4 border-b items-center">{{ item.cod }}</td>
+            <td class="py-2 px-4 border-b">{{ item.conta }}</td>
+           
+            <td class="py-2 px-4 border-b">{{ item.mod_despesa }}</td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ item?.ano2024.jan | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right"> {{ item.ano2024.fev | currency : "BRL" }}</td>
+            <td class="py-2 px-4 border-b text-right">
+                {{ item.ano2024.mar | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+                {{ item.ano2024.abr | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+                {{ item.ano2024.mai | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+                {{ item.ano2024.jun | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+                {{ item.ano2024.jul | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+                {{ item.ano2024.ago | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+                {{ item.ano2024.set | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+                {{ item.ano2024.out | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+                {{ item.ano2024.nov | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b  border-gray-300 text-right">
+                {{ item.ano2024.dez | currency : "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-l border-b font-bold text-right">
+                {{ item.ano2024.total | currency : "BRL" }}
+            </td>
+             <td class="py-2 px-4 border-l border-b  text-right">
+                {{ item.gd2023*366 | currency : "BRL" }}
+            </td>
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+  <div class="container mt-8 max-w-5xl mx-auto flex justify-center">
+    <table class="min-w-full bg-white border-separate mb-16">
+      <thead class="py-2 px-4 cursor-pointer text-left border-b">
+        <tr>
+          <th
+            class="py-2 px-4 border-b cursor-pointer border-r border-gray-300"
+          >
+            #
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer items-center"
+            (click)="sortTable('cod')"
+          >
+            Código
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer"
+            (click)="sortTable('conta')"
+          >
+            Receita
+          </th>
+          
+         
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('saldo')"
+          >
+            Jan
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Fev
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Mar
+          </th>
+          <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Abr
+        </th>
+        <th
+        class="py-2 px-4 border-b cursor-pointer text-center"
+        (click)="sortTable('valor')"
+      >
+        Mai
+      </th>
+      <th
+      class="py-2 px-4 border-b cursor-pointer text-center"
+      (click)="sortTable('valor')"
+    >
+      Jun
+    </th>
+    <th
+    class="py-2 px-4 border-b cursor-pointer text-center"
+    (click)="sortTable('valor')"
+  >
+    Jul
+  </th>
+  <th
+  class="py-2 px-4 border-b cursor-pointer text-center"
+  (click)="sortTable('valor')"
+>
+  Ago
+</th>
+<th
+class="py-2 px-4 border-b cursor-pointer text-center"
+(click)="sortTable('valor')"
+>
+Set
+</th>
+<th
+class="py-2 px-4 border-b cursor-pointer text-center"
+(click)="sortTable('valor')"
+>
+Out
+</th>
+<th
+class="py-2 px-4 border-b cursor-pointer text-center"
+(click)="sortTable('valor')"
+>
+Nov
+</th>
+<th
+class="py-2 px-4 border-b cursor-pointer text-center"
+(click)="sortTable('valor')"
+>
+Dez
+</th>
+<th
+class="py-2 px-4 border-l cursor-pointer text-center border-b border-gray-300" 
+(click)="sortTable('ano2024.total')"
+>
+Total
+</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of fonte1; let i = index" class="text-sm"
+        
+        >
+          <td
+            class="py-2 px-4 border-b border-r text-sm border-gray-300 italic"
+          >
+            {{ i + 1 }}
+          </td>
+          <td class="py-2 px-4 border-b items-center">{{ item.cod }}</td>
+          <td class="py-2 px-4 border-b">{{ item.conta }}</td>
+         
+         
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2024.jan*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right"> {{ item.ano2024.fev*(-1) | currency : "BRL" }}</td>
+          <td class="py-2 px-4 border-b text-right">
+              {{ item.ano2024.mar*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+              {{ item.ano2024.abr*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+              {{ item.ano2024.mai*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+              {{ item.ano2024.jun*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+              {{ item.ano2024.jul*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+              {{ item.ano2024.ago*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+              {{ item.ano2024.set*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+              {{ item.ano2024.out*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+              {{ item.ano2024.nov*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b  border-gray-300 text-right">
+              {{ item.ano2024.dez*(-1) | currency : "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-l border-b font-bold text-right">
+              {{ item.ano2024.total*(-1)| currency : "BRL" }}
+          </td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</nav>

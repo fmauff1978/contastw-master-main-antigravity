@@ -1,0 +1,818 @@
+<nav class="bg-gray-600 w-full">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-center">
+      <!-- Alterado justify-between para justify-center -->
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="block size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+          <svg
+            class="hidden size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center"
+      >
+        <!-- Alterado justify-start para justify-center -->
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex items-center space-x-4">
+            <a
+              href="#"
+              class="bg-gray-600 px-3 py-2 text-xl font-medium text-white"
+              aria-current="page"
+              >Despesas e Receitas Mensais 2026</a
+            >
+
+            <a
+              href="#"
+              class="rounded-lg px-3 py-2 text-xs font-medium text-gray-300 bg-red-600"
+            >
+              Alvo Desp Líquidas: {{ this.teto | currency: "BRL" }}
+              <span class="ml-2">Realizado:</span>
+              {{ this.sdoDespesaLiq | currency: "BRL" }}
+              <span class="ml-2">Atg:</span>
+              {{
+                this.sdoDespesaLiq / this.teto | percent: "1.1-1" : "pt-BR"
+              }}</a
+            >
+
+            <div class="relative inline-block">
+              <!-- O seu botão original -->
+              <button
+                class="text-white bg-purple-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Posição {{ log1?.toDate() | date: "dd/MM/yyyy HH:mm" }}
+              </button>
+
+              <!-- 2. O Badge posicionado no canto superior direito -->
+              <span
+                class="absolute -top-2 -right-2 z-10 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-red-500 px-1 text-[10px] text-white shadow-sm cursor-pointer hover:bg-red-600 border-2 border-white dark:border-gray-800"
+              >
+                {{ qtdTotalMaior }}/{{ tamanho }}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              (click)="atualizarMes()"
+              class="text-white bg-green-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
+              Atualizar
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      ></div>
+    </div>
+  </div>
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+      <a
+        href="#"
+        class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+        aria-current="page"
+      ></a>
+      <a
+        href="parc2"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Parcelamentos</a
+      >
+    </div>
+  </div>
+</nav>
+
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+  >
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+
+    <app-spinner></app-spinner>
+
+    <div class="container mt-8 max-w-5xl mx-auto flex justify-center">
+      <table class="min-w-full bg-white border-separate mb-4">
+        <thead class="py-2 px-4 border-b cursor-pointer text-left">
+          <tr>
+            <th
+              class="py-2 px-4 border-b cursor-pointer border-r border-gray-300"
+            >
+              #
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer items-center"
+              (click)="sortTable('cod')"
+            >
+              Código
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer"
+              (click)="sortTable('conta')"
+            >
+              Despesa
+            </th>
+
+            <th
+              class="py-2 px-4 border-b cursor-pointer"
+              (click)="sortTable('mod_despesa')"
+            >
+              Modalidade
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('saldo')"
+            >
+              Jan
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Fev
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Mar
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Abr
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Mai
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Jun
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Jul
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Ago
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Set
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Out
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Nov
+            </th>
+            <th
+              class="py-2 px-4 border-b cursor-pointer text-center"
+              (click)="sortTable('valor')"
+            >
+              Dez
+            </th>
+            <th
+              class="py-2 px-4 border-l cursor-pointer text-center border-gray-300"
+              (click)="sortTable2('ano2026.total')"
+            >
+              Total
+            </th>
+            <th
+              class="py-2 px-4 border-l cursor-pointer text-center border-gray-300"
+            >
+              Versus2025
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-sm font-bold bg-gray-100">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            ></td>
+            <td class="py-2 px-4 border-b items-center">Total</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.jan | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.fev | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.mar | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.abr | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.mai | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.jun | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.jul | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.ago | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.set | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.out | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisMensais.nov | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisMensais.dez | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b font-bold border-gray-300 text-right">
+              {{ calcularTotalHorizontal(totaisMensais) | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b border-l border-gray-300 text-right"
+            ></td>
+          </tr>
+          <tr class="text-sm italic text-gray-600">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            ></td>
+            <td class="py-2 px-4 border-b items-center">Off</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.jan | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.fev | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.mar | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.abr | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.mai | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.jun | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.jul | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.ago | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.set | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.out | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisOff.nov | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisOff.dez | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-gray-300 text-right">
+              {{ calcularTotalHorizontal(totaisOff) | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b border-l border-gray-300 text-right"
+            ></td>
+          </tr>
+          <tr class="text-sm italic text-gray-600">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            ></td>
+            <td class="py-2 px-4 border-b items-center">Compromissada</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.jan | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.fev | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.mar | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.abr | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.mai | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.jun | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.jul | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.ago | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.set | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.out | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisCompromissada.nov | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisCompromissada.dez | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-gray-300 text-right">
+              {{
+                calcularTotalHorizontal(totaisCompromissada) | currency: "BRL"
+              }}
+            </td>
+            <td
+              class="py-2 px-4 border-b border-l border-gray-300 text-right"
+            ></td>
+          </tr>
+          <tr class="text-sm italic text-gray-600">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            ></td>
+            <td class="py-2 px-4 border-b items-center">Gerenciável</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.jan | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.fev | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.mar | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.abr | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.mai | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.jun | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.jul | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.ago | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.set | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.out | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisGerenciavel.nov | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisGerenciavel.dez | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-gray-300 text-right">
+              {{ calcularTotalHorizontal(totaisGerenciavel) | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b border-l border-gray-300 text-right"
+            ></td>
+          </tr>
+          <tr class="text-sm font-bold bg-yellow-50">
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300"
+            ></td>
+            <td class="py-2 px-4 border-b items-center">Despesa Líquida</td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b"></td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.jan | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.fev | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.mar | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.abr | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.mai | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.jun | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.jul | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.ago | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.set | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.out | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+              {{ totaisDespesaLiquida.nov | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+              {{ totaisDespesaLiquida.dez | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-gray-300 text-right">
+              {{
+                calcularTotalHorizontal(totaisDespesaLiquida) | currency: "BRL"
+              }}
+            </td>
+            <td
+              class="py-2 px-4 border-b border-l border-gray-300 text-right"
+            ></td>
+          </tr>
+          <tr
+            *ngFor="let item of fonte0; let i = index"
+            class="text-sm"
+            [ngStyle]="{
+              'background-color': isOlderThanThreshold(
+                item.saldo / (item.gd2025 * dd)
+              )
+                ? 'peachpuff'
+                : 'white',
+            }"
+          >
+            <td
+              class="py-2 px-4 border-b border-r text-sm border-gray-300 italic"
+            >
+              {{ i + 1 }}
+            </td>
+            <td class="py-2 px-4 border-b items-center">{{ item.cod }}</td>
+            <td class="py-2 px-4 border-b">{{ item.conta }}</td>
+
+            <td class="py-2 px-4 border-b">{{ item.mod_despesa }}</td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.jan > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.jan | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.fev > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.fev | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.mar > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.mar | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.abr > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.abr | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.mai > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.mai | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.jun > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.jun | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.jul > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.jul | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.ago > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.ago | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.set > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.set | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.out > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.out | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.nov > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.nov | currency: "BRL" }}
+            </td>
+            <td
+              class="py-2 px-4 border-b border-r border-gray-300 text-right"
+              [ngClass]="{
+                'bg-red-100 text-red-700':
+                  item.ano2026.dez > item.ano2026.total / this.mes1,
+              }"
+            >
+              {{ item.ano2026.dez | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b font-bold border-gray-300 text-right">
+              {{ item.ano2026.total | currency: "BRL" }}
+            </td>
+            <td class="py-2 px-4 border-b border-l border-gray-300 text-right">
+              {{ item.gd2025 * dd | currency: "BRL" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container mt-8 max-w-5xl mx-auto flex justify-center">
+    <table class="min-w-full bg-white border-separate mb-24">
+      <thead class="py-2 px-4 border-b cursor-pointer text-left">
+        <tr>
+          <th
+            class="py-2 px-4 border-b cursor-pointer border-r border-gray-300"
+          >
+            #
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer items-center"
+            (click)="sortTable('cod')"
+          >
+            Código
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer"
+            (click)="sortTable('conta')"
+          >
+            Receita
+          </th>
+
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('saldo')"
+          >
+            Jan
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Fev
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Mar
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Abr
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Mai
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Jun
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Jul
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Ago
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Set
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Out
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Nov
+          </th>
+          <th
+            class="py-2 px-4 border-b cursor-pointer text-center"
+            (click)="sortTable('valor')"
+          >
+            Dez
+          </th>
+          <th
+            class="py-2 px-4 border-l cursor-pointer text-center border-b border-gray-300"
+            (click)="sortTable('ano2026.total')"
+          >
+            Total
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of fonte1; let i = index" class="text-sm">
+          <td
+            class="py-2 px-4 border-b border-r text-sm border-gray-300 italic"
+          >
+            {{ i + 1 }}
+          </td>
+          <td class="py-2 px-4 border-b items-center">{{ item.cod }}</td>
+          <td class="py-2 px-4 border-b">{{ item.conta }}</td>
+
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.jan * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.fev * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.mar * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.abr * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.mai * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.jun * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.jul * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.ago * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.set * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.out * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b text-right">
+            {{ item.ano2026.nov * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-b border-gray-300 text-right">
+            {{ item.ano2026.dez * -1 | currency: "BRL" }}
+          </td>
+          <td class="py-2 px-4 border-l border-b font-bold text-right">
+            {{ item.ano2026.total * -1 | currency: "BRL" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</nav>

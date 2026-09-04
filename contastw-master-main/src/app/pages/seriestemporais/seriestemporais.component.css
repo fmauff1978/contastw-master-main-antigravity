@@ -1,0 +1,17 @@
+/* Garante que o gráfico não seja cortado */
+:host ::ng-deep .card {
+  overflow: visible !important;
+}
+
+:host ::ng-deep p-chart {
+  display: block;
+  overflow: visible !important;
+}
+
+:host ::ng-deep .p-chart {
+  overflow: visible !important;
+}
+
+:host ::ng-deep canvas {
+  max-width: 100% !important;
+}

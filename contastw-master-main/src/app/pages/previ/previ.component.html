@@ -1,0 +1,155 @@
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+  >
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+
+
+
+
+      <nav class="bg-white border-gray-200">
+        <div
+          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+        >
+          <h1
+            class="mb-3 text-lg text-black-900 md:text-xl dark:text-gray-400 mt-2 mr-10"
+          >
+            Previ
+          </h1>
+          <ul
+            class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+          >
+            <li>
+              <button
+                type="button"
+
+                (click)="abrirForm()"
+
+                class="text-white bg-red-900  focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2   focus:outline-none "
+              >
+               Adicionar Mês
+              </button>
+            </li>
+
+
+
+
+
+          </ul>
+        </div>
+      </nav>
+
+
+
+
+
+
+      <div class="container mx-auto mt-12">
+
+        <app-modal-previ
+        [showModal]="showModal"
+        [item]="selectedItem"
+        (close)="closeModal()"
+        (save)="saveData()"></app-modal-previ>
+
+
+        <app-modalcad-previ
+        [showModal3]="showModal3"
+        [item]="selectedItem"
+        (close)="closeModal()"
+        (save)="saveData()"></app-modalcad-previ>
+        <table class="min-w-full bg-white">
+          <thead class="py-2 px-4 border-b cursor-pointer text-center align-middle">
+            <tr>
+              <th
+                class="py-2 px-4 border-b cursor-pointer"
+                (click)="sortTable('mes')"
+              >
+                Mês
+              </th>
+              <th
+                class="py-2 px-4 border-b cursor-pointer"
+                (click)="sortTable('datalcto')"
+              >
+                Saldo Inicial
+              </th>
+              <th
+                class="py-2 px-4 border-b cursor-pointer"
+                (click)="sortTable('descricao')"
+              >
+                Contribuição
+              </th>
+              <th
+                class="py-2 px-4 border-b cursor-pointer"
+                (click)="sortTable('debito')"
+              >
+                Rendimentos Mês
+              </th>
+              <th
+                class="py-2 px-4 border-b cursor-pointer"
+                (click)="sortTable('credito')"
+              >
+                Saldo Final
+              </th>
+              <th
+                class="py-2 px-4 border-b cursor-pointer"
+                (click)="sortTable('valor')"
+              >
+                Rentabilidade no Mês
+              </th>
+              <th
+                class="py-2 px-4 border-b cursor-pointer"
+                (click)="sortTable('valor')"
+              >
+                Ações
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of previ()"
+            >
+
+              <td class="py-2 px-4 border-b" [style.backgroundColor]="isOlderThanThreshold(item.rentabilidade) ? 'orange' : 'transparent'">
+                {{ item.mes.toDate() | date : "MM/yyyy" }}
+              </td>
+              <td class="py-2 px-4 border-b" [style.backgroundColor]="isOlderThanThreshold(item.rentabilidade) ? 'orange' : 'transparent'">{{ item.saldo_inicial|currency: "BRL" }}</td>
+              <td class="py-2 px-4 border-b"[style.backgroundColor]="isOlderThanThreshold(item.rentabilidade) ? 'orange' : 'transparent'">{{ item.contribuicao|currency: "BRL" }}</td>
+              <td class="py-2 px-4 border-b text-center align-middle" [style.backgroundColor]="isOlderThanThreshold(item.rentabilidade) ? 'orange' : 'transparent'" >{{ item.rendimento|currency: "BRL" }}</td>
+              <td class="py-2 px-4 border-b"[style.backgroundColor]="isOlderThanThreshold(item.rentabilidade) ? 'orange' : 'transparent'">{{ item.saldo_final | currency : "BRL" }}</td>
+              <td class="py-2 px-4 border-b text-center align-middle"[style.backgroundColor]="isOlderThanThreshold(item.rentabilidade) ? 'orange' : 'transparent'">{{ item.rentabilidade | percent : "1.2-2"  }}</td>
+              <td class="py-2 px-4 border-b" [style.backgroundColor]="isOlderThanThreshold(item.rentabilidade) ? 'orange' : 'transparent'">
+                <button (click)="editarData(item)">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>

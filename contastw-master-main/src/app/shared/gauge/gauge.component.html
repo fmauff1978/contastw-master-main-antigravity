@@ -1,0 +1,179 @@
+<div
+  class="flex flex-wrap justify-center items-center gap-8 w-full bg-gray-500"
+>
+  <div class="relative flex flex-col items-center pb-4">
+    <ngx-gauge
+    class="gauge-pequeno"
+      size="180"
+      type="arch"
+      thick="12"
+      [value]="andamento"
+      cap="butt"
+      append="%"
+      foregroundColor="#000000"
+   
+    >
+    </ngx-gauge>
+
+    <div class="absolute bottom-6 text-center">
+      <span class="text-xs">Dias Decorridos</span>
+    </div>
+  </div>
+
+
+
+
+  <div class="relative inline-block p-4">
+    
+      <ngx-gauge
+      class="gauge-pequeno"
+        size="180"
+        type="arch"
+        thick="12"
+        min="0"
+        [max]="rlanual"
+        [value]="rl1"
+        cap="butt"
+        append="mil"
+        foregroundColor="#465EFF"
+      >
+      </ngx-gauge>
+
+      <!-- Subimos um pouco mais o label (de bottom-2 para bottom-4 ou 6) 
+         para ele não "empurrar" visualmente o corte -->
+      <div class="absolute bottom-6 left-0 right-0 text-center flex flex-col items-center">
+        <span class="text-xs mb-1">Receita Líquida</span>
+        <span class="text-xs" [style.color]="'peachpuff'">Proj 31dez $ {{this.projrl | number:'1.0-0'}}</span>
+      </div>
+        <span  *ngIf="((this.rl1/this.rlanual)*100)< this.andamento"
+         class="absolute animate-pulse top-[10%] right-[12%] z-10 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-[12px] font-bold text-white shadow-md cursor-pointer border-2 border-white"
+        >
+          !
+        </span>
+      </div>
+
+      <div class="relative inline-block p-4">
+    
+      <ngx-gauge
+      class="gauge-pequeno"
+        size="180"
+        type="arch"
+        thick="12"
+        min="0"
+        [max]="dlanual"
+        [value]="dl1"
+        cap="butt"
+        append="mil"
+        foregroundColor="#FF3B30"
+      >
+      </ngx-gauge>
+
+      <!-- Subimos um pouco mais o label (de bottom-2 para bottom-4 ou 6) 
+         para ele não "empurrar" visualmente o corte -->
+      <div class="absolute bottom-6 left-0 right-0 text-center flex flex-col items-center">
+        <span class="text-xs mb-1">Despesa Líquida</span>
+      <span class="text-xs" [style.color]="'peachpuff'">Proj 31dez $ {{this.projdl | number:'1.0-0'}}</span>
+    </div>
+        <span  *ngIf="((this.dl1/this.dlanual)*100)> this.andamento"
+         class="absolute animate-pulse top-[10%] right-[12%] z-10 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-[12px] font-bold text-white shadow-md cursor-pointer border-2 border-white"
+        >
+          !
+        </span>
+      </div>
+  
+
+  
+
+  <div class="relative flex flex-col items-center pb-4">
+    <ngx-gauge
+      class="gauge-pequeno"
+      size="180"
+      type="arch"
+      thick="12"
+      min="0"
+      [max]="alvo"
+      [value]="aum"
+      append="MM"
+      cap="butt"
+      foregroundColor="#4B3FB8"
+    >
+    </ngx-gauge>
+    <div class="absolute bottom-6 text-center">
+      <span class="text-xs">AUM</span>
+    </div>
+  </div>
+  <!-- Gauge 1 -->
+  <!-- Adicionamos pb-4 para dar folga na base -->
+  <div class="relative flex flex-col items-center pb-4">
+    <ngx-gauge
+    class="gauge-pequeno"
+      size="140"
+      type="arch"
+      thick="12"
+      [value]="comp1"
+      cap="butt"
+      append="%"
+      [thresholds]="compromissadaConfig"
+    >
+    </ngx-gauge>
+
+    <!-- Subimos um pouco mais o label (de bottom-2 para bottom-4 ou 6) 
+         para ele não "empurrar" visualmente o corte -->
+    <div class="absolute bottom-3 text-center">
+      <span class="text-xs">Compromissadas</span>
+    </div>
+  </div>
+
+  <!-- Gauge 2 -->
+  <div class="relative flex flex-col items-center pb-4">
+    <ngx-gauge
+      size="140"
+      type="arch"
+      thick="12"
+      [value]="ger"
+      cap="butt"
+      append="%"
+      [thresholds]="gerenciavelConfig"
+    >
+    </ngx-gauge>
+    <div class="absolute bottom-3 text-center">
+      <span class="text-xs">Gerenciáveis</span>
+    </div>
+  </div>
+
+  <div class="relative flex flex-col items-center pb-4">
+    <ngx-gauge
+      size="140"
+      type="arch"
+      thick="20"
+      [value]="mult1"
+      min="0"
+      [max]="multanual"
+      append="%"
+      cap="butt"
+      [thresholds]="negativeThresholdConfig"
+    >
+    </ngx-gauge>
+    <div class="absolute bottom-3 text-center">
+      <span class="text-xs">Desp/Rec Liq</span>
+    </div>
+  </div>
+
+  <div class="relative flex flex-col items-center pb-4">
+    <ngx-gauge
+      size="140"
+      type="arch"
+      thick="20"
+      [value]="dfo"
+      min="0"
+      [max]="5245"
+      append="$"
+      cap="butt"
+      foregroundColor="#FF3B30"
+    >
+    </ngx-gauge>
+    <div class="absolute bottom-3 text-center">
+      <span class="text-xs">DFO</span>
+    </div>
+  </div>
+</div>

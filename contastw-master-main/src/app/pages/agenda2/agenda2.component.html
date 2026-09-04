@@ -1,0 +1,625 @@
+<!-- Modais de Cadastro e Edição -->
+<app-cad
+  [showModal3]="showModal3"
+  [item]="selectedItem"
+  (close)="closeModal()"
+  (save)="saveData()"
+></app-cad>
+
+<app-edit
+  [showModal4]="showModal4"
+  [item]="selectedItem"
+  (close)="closeModal()"
+  (save)="saveData()"
+></app-edit>
+
+<div
+  class="min-h-screen bg-gray-50/50 dark:bg-gray-900/50 py-8 px-4 sm:px-6 lg:px-8"
+>
+  <div class="max-w-7xl mx-auto space-y-6">
+    <!-- Cabeçalho Principal da Página -->
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2"
+    >
+      <div>
+        <div class="flex items-center gap-2 mb-1"></div>
+        <h1
+          class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+          Agenda
+        </h1>
+      </div>
+
+      <!-- Botão de Ação Primária -->
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          (click)="incluir()"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 shadow-md shadow-indigo-600/20 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
+          Novo Agendamento
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards de Indicadores / Métricas (KPIs) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Card: Valor em Atraso -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-rose-600 dark:text-rose-400"
+            >
+              Valor em Atraso
+            </span>
+            <div
+              class="text-2xl sm:text-3xl font-extrabold text-rose-600 dark:text-rose-400"
+            >
+              {{ atrasado() || 0 | currency: "BRL" }}
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-rose-50 text-rose-600 dark:bg-rose-950/50 dark:text-rose-400 border border-rose-100 dark:border-rose-900/50"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center gap-2 text-xs">
+          <span
+            class="font-medium px-2 py-0.5 rounded-md"
+            [ngClass]="
+              totalAtrasadosCount() > 0
+                ? 'bg-rose-100 text-rose-800 dark:bg-rose-900/60 dark:text-rose-200'
+                : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+            "
+          >
+            {{ totalAtrasadosCount() }} pendente(s)
+          </span>
+          <span class="text-gray-500 dark:text-gray-400"
+            >precisam de atenção</span
+          >
+        </div>
+      </div>
+
+      <!-- Card: Total Geral Agendado -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400"
+            >
+              Total Agendado
+            </span>
+            <div
+              class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white"
+            >
+              {{ totalAgendado() | currency: "BRL" }}
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/50"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center gap-2 text-xs">
+          <span
+            class="bg-indigo-100 text-indigo-800 dark:bg-indigo-900/60 dark:text-indigo-200 font-medium px-2 py-0.5 rounded-md"
+          >
+            {{ agenda().length }} agendamento(s)
+          </span>
+          <span class="text-gray-500 dark:text-gray-400"
+            >cadastrados no total</span
+          >
+        </div>
+      </div>
+
+      <!-- Card: Contas em Dia -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md sm:col-span-2 lg:col-span-1"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400"
+            >
+              Contas no Prazo
+            </span>
+            <div
+              class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400"
+            >
+              {{ itensEmDiaCount() }}
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center gap-2 text-xs">
+          <span
+            class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-200 font-medium px-2 py-0.5 rounded-md"
+          >
+            Em dia
+          </span>
+          <span class="text-gray-500 dark:text-gray-400"
+            >aguardando data de vencimento</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Filtros e Busca -->
+    <div
+      class="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-200/80 dark:border-gray-700 flex flex-col md:flex-row items-center justify-between gap-4"
+    >
+      <!-- Input de Busca -->
+      <div class="relative w-full md:max-w-md">
+        <div
+          class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
+        <input
+          type="text"
+          [(ngModel)]="termoBusca"
+          placeholder="Buscar por descrição, origem ou recorrência..."
+          class="w-full pl-10 pr-4 py-2 text-sm bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+        />
+        <button
+          *ngIf="termoBusca()"
+          (click)="termoBusca.set('')"
+          class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+          title="Limpar busca"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Filtros de Status (Pílulas) -->
+      <div
+        class="flex items-center gap-1.5 w-full md:w-auto overflow-x-auto pb-1 md:pb-0"
+      >
+        <button
+          type="button"
+          (click)="filtroStatus.set('todos')"
+          [ngClass]="
+            filtroStatus() === 'todos'
+              ? 'bg-indigo-600 text-white shadow-sm'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+          "
+          class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap"
+        >
+          Todos ({{ agenda().length }})
+        </button>
+        <button
+          type="button"
+          (click)="filtroStatus.set('atrasados')"
+          [ngClass]="
+            filtroStatus() === 'atrasados'
+              ? 'bg-rose-600 text-white shadow-sm'
+              : 'bg-rose-50 text-rose-700 hover:bg-rose-100 dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-900/50'
+          "
+          class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5"
+        >
+          <span
+            class="w-1.5 h-1.5 rounded-full"
+            [ngClass]="
+              filtroStatus() === 'atrasados' ? 'bg-white' : 'bg-rose-500'
+            "
+          ></span>
+          Atrasados ({{ totalAtrasadosCount() }})
+        </button>
+        <button
+          type="button"
+          (click)="filtroStatus.set('em_dia')"
+          [ngClass]="
+            filtroStatus() === 'em_dia'
+              ? 'bg-emerald-600 text-white shadow-sm'
+              : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-900/50'
+          "
+          class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5"
+        >
+          <span
+            class="w-1.5 h-1.5 rounded-full"
+            [ngClass]="
+              filtroStatus() === 'em_dia' ? 'bg-white' : 'bg-emerald-500'
+            "
+          ></span>
+          No Prazo ({{ itensEmDiaCount() }})
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabela Principal de Agendamentos -->
+    <div
+      class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 overflow-hidden"
+    >
+      <div class="overflow-x-auto">
+        <table
+          class="w-full text-left text-sm text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="bg-gray-50/80 dark:bg-gray-700/50 text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 tracking-wider border-b border-gray-200/80 dark:border-gray-700"
+          >
+            <tr>
+              <th scope="col" class="py-3.5 px-4 sm:px-6">Vencimento</th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6">Status</th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6">Descrição</th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6">Origem</th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-right">Valor</th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-700/60">
+            <tr
+              *ngFor="let item of agendaFiltrada()"
+              class="transition-colors duration-150 border-l-4"
+              [ngClass]="{
+                'bg-rose-50/60 hover:bg-rose-100/60 dark:bg-rose-950/20 dark:hover:bg-rose-900/30 border-l-rose-500':
+                  isOlderThanThreshold(item.agendado_para?.toDate()),
+                'bg-amber-50/50 hover:bg-amber-100/50 dark:bg-amber-950/20 dark:hover:bg-amber-900/30 border-l-amber-500':
+                  !isOlderThanThreshold(item.agendado_para?.toDate()) &&
+                  isDueToday(item.agendado_para?.toDate()),
+                'bg-white hover:bg-gray-50/80 dark:bg-gray-800 dark:hover:bg-gray-700/40 border-l-transparent':
+                  !isOlderThanThreshold(item.agendado_para?.toDate()) &&
+                  !isDueToday(item.agendado_para?.toDate()),
+              }"
+            >
+              <!-- Data / Vencimento -->
+              <td class="py-4 px-4 sm:px-6 whitespace-nowrap">
+                <div class="flex items-center gap-2">
+                  <svg
+                    class="w-4 h-4 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <span class="font-semibold text-gray-900 dark:text-white">
+                    {{ item.agendado_para?.toDate() | date: "dd/MM/yyyy" }}
+                  </span>
+                </div>
+              </td>
+
+              <!-- Status Badge -->
+              <td class="py-4 px-4 sm:px-6 whitespace-nowrap">
+                <span
+                  *ngIf="isOlderThanThreshold(item.agendado_para?.toDate())"
+                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"
+                  ></span>
+                  Atrasado
+                </span>
+
+                <span
+                  *ngIf="
+                    !isOlderThanThreshold(item.agendado_para?.toDate()) &&
+                    isDueToday(item.agendado_para?.toDate())
+                  "
+                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                  Vence Hoje
+                </span>
+
+                <span
+                  *ngIf="
+                    !isOlderThanThreshold(item.agendado_para?.toDate()) &&
+                    !isDueToday(item.agendado_para?.toDate())
+                  "
+                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  No Prazo
+                </span>
+              </td>
+
+              <!-- Descrição e Recorrência -->
+              <td class="py-4 px-4 sm:px-6">
+                <div class="flex flex-col">
+                  <span
+                    class="font-medium text-gray-900 dark:text-white text-base"
+                  >
+                    {{ item.descricao }}
+                  </span>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span
+                      *ngIf="item.recor"
+                      class="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-md bg-gray-100 text-gray-600 dark:bg-gray-700/60 dark:text-gray-300 capitalize"
+                    >
+                      <svg
+                        class="w-3 h-3 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                        />
+                      </svg>
+                      {{ item.recor }}
+                    </span>
+                  </div>
+                </div>
+              </td>
+
+              <!-- Origem -->
+              <td class="py-4 px-4 sm:px-6 whitespace-nowrap">
+                <span
+                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-600"
+                >
+                  {{ item.origem || "Geral" }}
+                </span>
+              </td>
+
+              <!-- Valor -->
+              <td class="py-4 px-4 sm:px-6 text-right whitespace-nowrap">
+                <span
+                  class="font-bold text-base"
+                  [ngClass]="
+                    isOlderThanThreshold(item.agendado_para?.toDate())
+                      ? 'text-rose-600 dark:text-rose-400'
+                      : 'text-gray-900 dark:text-white'
+                  "
+                >
+                  {{ item.valor | currency: "BRL" }}
+                </span>
+              </td>
+
+              <!-- Ações -->
+              <td class="py-4 px-4 sm:px-6 whitespace-nowrap">
+                <div class="flex items-center justify-center gap-1.5">
+                  <!-- Concluir / Avançar Ciclo -->
+                  <button
+                    type="button"
+                    (click)="concluir(item)"
+                    title="Concluir / Avançar para o próximo ciclo"
+                    class="p-2 rounded-xl text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-400 dark:hover:bg-emerald-900/60 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </button>
+
+                  <!-- Editar -->
+                  <button
+                    type="button"
+                    (click)="editar(item)"
+                    title="Editar agendamento"
+                    class="p-2 rounded-xl text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/40 dark:text-indigo-400 dark:hover:bg-indigo-900/60 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                      />
+                    </svg>
+                  </button>
+
+                  <!-- Excluir -->
+                  <button
+                    type="button"
+                    (click)="excluir(item)"
+                    title="Excluir agendamento"
+                    class="p-2 rounded-xl text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/40 dark:text-rose-400 dark:hover:bg-rose-900/60 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Estado Vazio (quando não houver resultados na busca ou lista vazia) -->
+            <tr *ngIf="agendaFiltrada().length === 0">
+              <td colspan="6" class="py-12 text-center">
+                <div
+                  class="flex flex-col items-center justify-center space-y-3"
+                >
+                  <div
+                    class="p-3 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
+                  >
+                    <svg
+                      class="w-8 h-8"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="text-base font-medium text-gray-900 dark:text-white"
+                  >
+                    Nenhum agendamento encontrado
+                  </div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 max-w-sm">
+                    <ng-container
+                      *ngIf="termoBusca() || filtroStatus() !== 'todos'"
+                    >
+                      Nenhum resultado corresponde aos filtros aplicados.
+                    </ng-container>
+                    <ng-container
+                      *ngIf="!termoBusca() && filtroStatus() === 'todos'"
+                    >
+                      Você ainda não possui agendamentos cadastrados na agenda.
+                    </ng-container>
+                  </p>
+                  <div class="pt-2 flex gap-3">
+                    <button
+                      *ngIf="termoBusca() || filtroStatus() !== 'todos'"
+                      type="button"
+                      (click)="termoBusca.set(''); filtroStatus.set('todos')"
+                      class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400"
+                    >
+                      Limpar filtros
+                    </button>
+                    <button
+                      type="button"
+                      (click)="incluir()"
+                      class="text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 px-3 py-1.5 rounded-lg hover:bg-indigo-100 transition"
+                    >
+                      + Cadastrar novo
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rodapé da Tabela com Resumo -->
+      <div
+        class="bg-gray-50/80 dark:bg-gray-700/40 px-4 sm:px-6 py-3 border-t border-gray-200/80 dark:border-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs text-gray-500 dark:text-gray-400 gap-2"
+      >
+        <div>
+          Mostrando
+          <span class="font-semibold text-gray-700 dark:text-gray-200">{{
+            agendaFiltrada().length
+          }}</span>
+          de
+          <span class="font-semibold text-gray-700 dark:text-gray-200">{{
+            agenda().length
+          }}</span>
+          registros
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-rose-500"></span> Atrasado
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span> Vence Hoje
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> No Prazo
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

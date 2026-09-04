@@ -1,0 +1,173 @@
+<section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-4xl lg:py-16 mt-8 ">
+
+    <div class="flex items-center justify-between mb-4">
+    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+      Cadastrar Parcelamento
+    </h2>
+    <div class="flex ml-auto">
+    <button
+    type="submit" (click)="onSubmit()"
+    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
+     focus:ring-blue-300 mb-2 font-medium rounded-lg text-sm w-full sm:w-auto px-8 py-2.5 text-center 
+     dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  >
+    Gravar
+  </button>
+
+  <button
+  type="button" routerLink="/parc2"
+  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
+   focus:ring-blue-300 mb-2 font-medium rounded-lg text-sm ml-4 sm:w-auto px-8 py-2.5 text-center 
+   dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+>
+  Voltar
+</button>
+  </div>
+</div>
+
+  <app-alert 
+[showAlert]="showAlert"
+[title]="alertTitle"
+[message]="alertMessage"
+[alertType]="alertType"
+(close)="closeAlert()"></app-alert>
+    <form [formGroup]="meuForm" >
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="relative flex space-x-4">
+          <div>
+            <label for="data" class="block text-gray-700 text-sm font-bold mb-2"
+              >Data da Compra:</label
+            >
+            <input
+              type="date"
+              id="data"
+              formControlName="datacompra"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div class="w-60">
+            <label
+              for="contadebitada"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Cartão Vinculado</label
+            >
+            <select
+              id="contadebitada"
+              formControlName="cartaovinc"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            >
+              <option
+                *ngFor="let cat of items"
+                value="{{ cat.conta }}"
+              >
+                {{ cat.conta }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sm:col-span-1">
+          <label
+            for="name"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Origem</label
+          >
+          <input
+            type="text"
+            formControlName="origem"
+            name="name"
+            id="descricao"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Ex.: Rosa"
+            required=""
+          />
+        </div>
+        <div class="sm:col-span-2">
+          <label
+            for="name"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Descrição</label
+          >
+          <input
+            type="text"
+            formControlName="descricao"
+            name="name"
+            id="descricao"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Descreva o lançamento"
+            required=""
+          />
+        </div>
+
+        <div class="relative flex space-x-4">
+
+        <div class="w-full">
+          <label
+            for="valor"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Valor da Compra</label
+          >
+          <input
+            type="number"
+            formControlName="valorcompra"
+            name="valor"
+            id="valor"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="R$ 1.000,00"
+            required=""
+          />
+        </div>
+
+        <div class="w-full">
+          <label
+            for="valor"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Qtde de Parcelas</label
+          >
+          <input
+            type="number"
+            formControlName="qtdeparc"
+            name="valor"
+            id="valor"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="5"
+            required=""
+          />
+        </div>
+
+        <div class="w-full">
+          <label
+            for="valor"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Valor da Parcela</label
+          >
+          <input
+            type="number"
+            formControlName="valorparc"
+            name="valor"
+            id="valor"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="R$ 200,00"
+            required=""
+          />
+        </div>
+    </div>
+
+        <div>
+          <label for="data" class="block text-gray-700 text-sm font-bold mb-2"
+            >Data da 1a parcela:</label
+          >
+          <input
+            type="date"
+            id="data"
+            formControlName="data1aparc"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+
+      
+      </div>
+    </form>
+  </div>
+</section>

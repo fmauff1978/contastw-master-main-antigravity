@@ -1,0 +1,421 @@
+<div class="flex flex-col items-center w-full space-y-4 p-4 bg-gray-600">
+  <!-- Exemplo com fundo cinza para visualização -->
+  <div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+  </div>
+  <!-- Primeira DIV Principal -->
+  <!-- Removi flex-1, justify-center, sm:justify-start daqui, pois o pai agora controla o alinhamento -->
+  <div class="w-full sm:w-auto">
+    <!-- w-full em telas pequenas, auto em maiores para centralizar -->
+    <div class="hidden sm:ml-6 sm:block">
+      <div class="flex flex-wrap justify-center space-x-4">
+        <!-- Adicionado flex-wrap e justify-center para melhor responsividade dos links -->
+        <a
+          href="#"
+          class="rounded-md bg-gray-900 px-3 py-2 text-xs font-medium text-white mb-2 sm:mb-0"
+          aria-current="page"
+        >
+          Hoje é {{ this.hoje | date : "dd/MM/yyyy" }}
+        </a>
+        <a
+          href="#"
+          class="rounded-md px-3 py-2 text-xs font-medium text-gray-300 mb-2 sm:mb-0"
+        >
+          Dias Decorridos Ano:
+          {{ this.andamento() | percent : "1.2-2" : "pt-BR" }}
+        </a>
+        <a
+          href="#"
+          class="rounded-md px-3 py-2 text-xs font-medium text-gray-300 mb-2 sm:mb-0"
+        >
+          Passivo/Ativo: {{ this.pass_ativo() | number : "1.3-3" }} [{{
+            this.bm_passativo() | number : "1.3-3"
+          }}]
+          <span class="text-orange-200"
+            >({{ this.falta0() | currency : "BRL" }})</span
+          >
+        </a>
+        <a
+          href="#"
+          class="rounded-md px-3 py-2 text-xs font-medium text-gray-300 mb-2 sm:mb-0"
+        >
+          Passivo/AUM: {{ this.pass_aum() | number : "1.3-3" }} [{{
+            this.bm_passaum() | number : "1.3-3"
+          }}]
+          <span class="text-orange-200"
+            >({{ this.falta1() | currency : "BRL" }})</span
+          >
+        </a>
+        <a
+          class="rounded-md px-3 py-2 text-xs font-medium text-gray-300 mb-2 sm:mb-0"
+        >
+          Despesa/Receita Liquidas:
+          <span
+            [style.color]="
+              this.saldoDespLiq() / this.saldoReceitaLiquida < 0.627
+                ? 'palegreen'
+                : 'gray'
+            "
+            >{{
+              this.saldoDespLiq() / this.saldoReceitaLiquida
+                | percent : "1.1-1" : "pt-BR"
+            }}</span
+          >
+          [{{ this.bm_recdespliq() | percent : "1.1-1" : "pt-BR" }}]
+        </a>
+      </div>
+    </div>
+    <!-- Você pode querer mostrar algo diferente em telas pequenas se o conteúdo acima está hidden -->
+    <div class="sm:hidden text-center text-xs text-gray-400 p-2">
+      <!-- Conteúdo alternativo para telas pequenas - Bloco 1 -->
+      Indicadores (visível em telas maiores)
+    </div>
+  </div>
+
+  <!-- Segunda DIV Principal -->
+  <!-- Removi flex-1, justify-center, sm:justify-start daqui -->
+  <div class="w-full sm:w-auto">
+    <!-- w-full em telas pequenas, auto em maiores para centralizar -->
+    <div class="hidden sm:ml-6 sm:block">
+      <div class="flex flex-wrap justify-center space-x-4">
+        <!-- Adicionado flex-wrap e justify-center -->
+        <a
+          href="#"
+          class="rounded-md px-3 py-2 text-xs font-medium text-gray-300 mb-2 sm:mb-0"
+        >
+          Objetivo Mensal Passivo:
+          {{ this.faltapassivo() | currency : "BRL" }}
+          <span
+            [style.color]="
+              this.pagonomespassivo() > this.faltapassivo()
+                ? 'palegreen'
+                : 'peachpuff'
+            "
+            >[{{ this.pagonomespassivo() | currency : "BRL" }}]
+          </span>
+          | AUM: {{ this.faltaaum() | currency : "BRL" }}
+          <span
+            [style.color]="
+              this.pagonomesaum() > this.faltaaum() ? 'palegreen' : 'peachpuff'
+            "
+            >[{{ this.pagonomesaum() | currency : "BRL" }}]</span
+          >
+
+           | <span class="text-amber-200">Alvo 2034: {{ this.alvo() | currency : "BRL" }}</span>
+
+        </a>
+        <!-- Adicione mais links aqui se necessário -->
+      </div>
+    </div>
+    <!-- Conteúdo alternativo para telas pequenas -->
+    <div class="sm:hidden text-center text-xs text-gray-400 p-2">
+      <!-- Conteúdo alternativo para telas pequenas - Bloco 2 -->
+      Objetivos (visível em telas maiores)
+    </div>
+  </div>
+
+  <!-- A div absolute posicionada foi removida daqui, pois provavelmente pertence a outro contexto (como um menu dropdown de perfil) -->
+  <!-- Se você precisa dela, coloque-a no local apropriado da sua estrutura geral -->
+  <!--
+  <div
+    class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+  >
+     ... conteúdo do ícone de perfil/notificações ...
+  </div>
+  -->
+</div>
+
+<div
+  class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+></div>
+
+<div class="sm:hidden" id="mobile-menu">
+  <div class="space-y-1 px-2 pt-2 pb-3">
+    <a
+      href="#"
+      class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+      aria-current="page"
+      >{{ this.hoje | date : "dd/MM/yyyy" }}</a
+    >
+    <a
+      href="#"
+      class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+      >Dias Decorridos Ano:
+      {{ this.andamento() | percent : "1.2-2" : "pt-BR" }}</a
+    >
+    <a
+      href="#"
+      class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+      >Passivo/Ativo: {{ this.pass_ativo() | number : "1.3-3" }} [0,371]</a
+    >
+    <a
+      href="#"
+      class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+      >Passivo/AUM: {{ this.pass_aum() | number : "1.3-3" }} [0,564]</a
+    >
+  </div>
+</div>
+
+<div
+  class="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+>
+  <div class="border-t border-gray-200 dark:border-gray-600">
+    <div
+      class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800"
+      aria-labelledby="stats-tab"
+    >
+      <dl
+        class="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-2 xl:grid-cols-4 dark:text-white sm:p-8"
+      >
+        <div class="flex flex-col items-center justify-center">
+          <dt class="mb-2 text-2xl font-extrabold">
+            {{ this.saldoAtivo() | currency : "BRL" }}
+          </dt>
+          <dd class="text-gray-500 dark:text-gray-400">Ativo Total</dd>
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <dt class="mb-2 text-2xl font-extrabold">
+            {{ this.saldoPassivo() | currency : "BRL" }}
+          </dt>
+          <dd class="text-gray-500 dark:text-gray-400">Passivo Total</dd>
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <dt class="mb-2 text-2xl font-extrabold">
+            {{ this.saldoResultado() | currency : "BRL" }}
+          </dt>
+          <dd class="text-gray-500 dark:text-gray-400">Resultado Acumulado</dd>
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <dt class="mb-2 text-2xl font-extrabold">
+            {{ this.superavit() | currency : "BRL" }}
+          </dt>
+          <dd class="text-gray-500 dark:text-gray-400">
+            Receitas-Despesas Totais
+          </dd>
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <dt class="mb-2 text-2xl font-extrabold">
+            {{ this.aum() | currency : "BRL" }}
+          </dt>
+          <dd class="text-gray-500 dark:text-gray-400">AUM</dd>
+          <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
+            <div
+              class="bg-purple-500 rounded-full h-4"
+              [style.width]="getProgress(this.aum(), this.alvo())"
+            ></div>
+          </div>
+
+          <span class="text-xs font-medium text-gray-500 dark:text-gray-400">{{
+            this.aum() / this.alvo() | percent : "1.2-2" : "pt-BR"
+          }}</span>
+        </div>
+
+        <div class="flex flex-col items-center justify-center">
+          <dt class="mb-2 text-2xl font-extrabold">
+            {{ this.saldoReceitaLiquida | currency : "BRL" }}
+          </dt>
+          <dd class="text-gray-500 dark:text-gray-400">Receita Líquida</dd>
+          <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
+            <div
+              class="bg-blue-900 rounded-full h-4"
+              [style.width]="getProgress(this.saldoReceitaLiquida, 420000)"
+            ></div>
+          </div>
+
+          <span
+            class="text-xs font-medium text-gray-500 dark:text-gray-400"
+            [style.color]="
+              this.saldoReceitaLiquida / 420000 > this.andamento()
+                ? 'teal'
+                : 'red'
+            "
+            >{{
+              this.saldoReceitaLiquida / 420000 | percent : "1.2-2" : "pt-BR"
+            }}</span
+          >
+        </div>
+
+        <div class="flex flex-col items-center justify-center">
+          <dt class="mb-2 text-2xl font-extrabold">
+            {{ this.saldoDespLiq() | currency : "BRL" }}
+          </dt>
+          <dd class="text-gray-500 dark:text-gray-400">Despesas Líquidas</dd>
+          <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
+            <div
+              class="bg-red-700 rounded-full h-4"
+              [style.width]="getProgress(this.saldoDespLiq(), 315000)"
+            ></div>
+          </div>
+
+          <span
+            class="text-xs font-medium text-gray-500 dark:text-gray-400"
+            [style.color]="
+              this.saldoDespLiq() / 420000 < this.andamento() ? 'teal' : 'red'
+            "
+            >{{
+              this.saldoDespLiq() / 315000 | percent : "1.2-2" : "pt-BR"
+            }}</span
+          >
+        </div>
+
+        <div class="flex flex-col items-center justify-center">
+          <dt class="mb-2 text-2xl font-extrabold">
+            {{ this.saldoDFO() | currency : "BRL" }}
+          </dt>
+          <dd class="text-gray-500 dark:text-gray-400">Despesas FinOrd</dd>
+          <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
+            <div
+              class="bg-red-600 rounded-full h-4"
+              [style.width]="getProgress(this.saldoDFO(), 47407)"
+            ></div>
+          </div>
+
+          <span
+            class="text-xs font-medium text-gray-500 dark:text-gray-400"
+            [style.color]="
+              this.saldoDFO() / 420000 < this.andamento() ? 'teal' : 'red'
+            "
+          >
+            {{ this.saldoDFO() / 47407 | percent : "1.2-2" : "pt-BR" }}
+          </span>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<div class="flex justify-center gap-8 mt-8 px-8">
+  <!-- LADO ESQUERDO: ATIVO (50%) -->
+  <div class="w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" style="display:flex; flex-direction:column; min-height:560px;">
+    <div class="flex items-center justify-center mb-4">
+      <h5 class="text-xl font-bold text-gray-900 dark:text-white">Ativo</h5>
+    </div>
+
+    <div class="relative overflow-x-auto" style="flex:1 1 auto; overflow-y:auto;">
+        <table class="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">Cod</th>
+              <th scope="col" class="px-6 py-3">Conta</th>
+              <th scope="col" class="px-6 py-3">Enquadramento</th>
+              <th scope="col" class="px-6 py-3 text-right">Saldo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+              *ngFor="let item of ctasAtivo()">
+              <td scope="row" class="px-6 py-4">{{ item.cod }}</td>
+              <td class="px-6 py-4">{{ item.conta }}</td>
+               <td class="px-6 py-4">{{ item.enquadramento }}</td>
+              <td class="px-6 py-4 text-right">{{ item.saldo | currency : "BRL" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <div class="mt-4 text-center text-sm font-semibold">TOTAL {{ saldoAtivo() | currency : "BRL" }}</div>
+  </div>
+
+  <!-- LADO DIREITO: PASSIVO E RESULTADO (50%) -->
+  <div class="w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" style="display:flex; flex-direction:column; min-height:560px;">
+    <!-- PASSIVO -->
+    <div class="mb-8" style="display:flex; flex-direction:column; flex:1 1 0; min-height:0;">
+      <div class="flex items-center justify-center mb-4">
+        <h5 class="text-xl font-bold text-gray-900 dark:text-white">Passivo</h5>
+      </div>
+      <div class="relative overflow-x-auto" style="flex:1 1 0; min-height:0; overflow-y:auto;">
+        <div style="min-height:0;">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3">Cod</th>
+                <th scope="col" class="px-6 py-3">Conta</th>
+                 <th scope="col" class="px-6 py-3">Enquadramento</th>
+                <th scope="col" class="px-6 py-3 text-right">Saldo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+                *ngFor="let item of ctasPassivo()">
+                <td scope="row" class="px-6 py-4">{{ item.cod }}</td>
+                <td class="px-6 py-4">{{ item.conta }}</td>
+                <td class="px-6 py-4">{{ item.enquadramento }}</td>
+                <td class="px-6 py-4 text-right">{{ item.saldo * -1 | currency : "BRL" }}</td>
+              </tr>
+            </tbody>
+          </table>
+           
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="border-t pt-8">
+      <div class="flex items-center justify-center mb-4">
+        <h5 class="text-xl font-bold text-gray-900 dark:text-white">Resultado</h5>
+      </div>
+      <div class="relative overflow-x-auto" style="display:flex; flex-direction:column; flex:1 1 0; min-height:0; overflow-y:auto;">
+        <div style="min-height:0; overflow-y:auto;">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3">Cod</th>
+                <th scope="col" class="px-6 py-3">Conta</th>
+                <th scope="col" class="px-6 py-3 text-right">Saldo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+                *ngFor="let item of ctasResultado()">
+                <td scope="row" class="px-6 py-4">{{ item.cod }}</td>
+                <td class="px-6 py-4">{{ item.conta }}</td>
+                <td class="px-6 py-4 text-right">{{ item.saldo * -1 | currency : "BRL" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      
+      <div class="flex items-center justify-center mt-4 mb-4">
+        <h5 class="text-xl font-bold text-gray-900 dark:text-white">Receitas - Despesas Totais</h5>
+      </div>
+
+       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3">Item</th>
+                <th scope="col" class="px-6 py-3">Superávit</th>
+                <th scope="col" class="px-6 py-3 text-right">Saldo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+                >
+                <td scope="row" class="px-6 py-4">999</td>
+                <td class="px-6 py-4">Superávit Bruto</td>
+                <td class="px-6 py-4 text-right">{{ this.superavit() | currency : "BRL" }}</td>
+              </tr>
+            </tbody>
+          </table>
+    
+
+            
+
+       
+
+
+
+
+
+    <div class="mt-4 text-center text-sm font-semibold">TOTAL {{ bp | currency : "BRL" }}</div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="mt-8">
+  <app-ticker></app-ticker>
+</div> -->
+
+
+
+

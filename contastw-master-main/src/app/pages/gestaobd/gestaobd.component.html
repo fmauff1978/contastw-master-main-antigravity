@@ -1,0 +1,126 @@
+
+<nav class="relative bg-gray-800">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      <!-- Mobile menu button-->
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-none"
+        >
+          <svg
+            class="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center"
+      >
+        <div class="flex gap-4 items-center">
+          <p class="rounded-md px-3 py-2 text-lg font-medium text-gray-300">
+           Contas
+          </p>
+            <li>
+          <button
+            type="button"
+            (click)="cadastrar()"
+            class="text-white bg-blue-900   hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          >
+            Criar Nova Conta
+          </button>
+        </li>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+  <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div
+      class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+    >
+      <button
+        data-collapse-toggle="navbar-default"
+        type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        aria-controls="navbar-default"
+        aria-expanded="false"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="w-5 h-5"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 17 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M1 1h15M1 7h15M1 13h15"
+          />
+        </svg>
+      </button>
+  
+    
+    </div>
+
+    <app-painelcontas></app-painelcontas>
+
+   
+  </nav>
+ 
+
+  <div class="container mt-8 max-w-24xl mx-auto flex justify-center">
+
+
+    <div>
+
+      <app-alert 
+    [showAlert]="showAlert"
+    [title]="alertTitle"
+    [message]="alertMessage"
+    [alertType]="alertType"
+    (close)="closeAlert()"></app-alert>
+
+    <app-modal 
+        [showModal]="showModal"
+        [item]="selectedItem"
+        (close)="closeModal()"
+        (save)="saveData($event)"></app-modal>
+
+        <app-contas 
+        [showModal2]="showModal2"
+        [item]="selectedItem"
+        (close)="closeModal()"
+        (save)="saveData($event)"></app-contas>
+
+      
+
+           
+
+       
+    
+
+
+
+
+

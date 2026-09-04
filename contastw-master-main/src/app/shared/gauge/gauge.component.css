@@ -1,0 +1,7 @@
+
+
+ngx-gauge .reading-block { font-size: 6px !important; }
+
+::ng-deep .gauge-pequeno .reading-block {
+    font-size: 32px !important;
+}

@@ -1,0 +1,15 @@
+/* Layout responsivo */
+@media (max-width: 1024px) {
+  .flex.w-1\/2 {
+    width: 100% !important;
+  }
+}
+
+/* Estilos para melhorar visualização */
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}

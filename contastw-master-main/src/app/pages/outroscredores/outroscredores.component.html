@@ -1,0 +1,207 @@
+<nav class="bg-gray-600 w-full">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-center">
+      <!-- Alterado justify-between para justify-center -->
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="block size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+          <svg
+            class="hidden size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center"
+      >
+        <!-- Alterado justify-start para justify-center -->
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              class="bg-gray-600 px-3 py-2 text-sm font-medium text-white"
+              aria-current="page"
+              >Outros Credores</a
+            >
+            <button
+              type="button"
+              (click)="incluir()"
+              class="bg-gray-600 px-3 py-2 text-sm font-medium text-white"
+              routerLink="/cadparc"
+              class="rounded-md bg-gray-900 px-3 py-2 text-xs font-medium text-white"
+              aria-current="page"
+            >
+              Cadastrar Novo Credor
+            </button>
+
+            <button
+              class="rounded-md px-3 py-2 text-xs font-medium text-gray-300 bg-red-600"
+            >
+              Saldo : {{ this.sr() | currency : "BRL" }}
+            </button>
+
+              <button [ngClass]="{
+    'bg-blue-600': estaConciliado,
+    'bg-red-500': !estaConciliado
+  }"
+              class="rounded-md px-3 py-2 text-xs font-medium text-gray-300 "
+            >
+              {{ estaConciliado ? 'Conciliado!' : 'Não conciliado!' }}            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      ></div>
+    </div>
+  </div>
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+      <a
+        href="#"
+        class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+        aria-current="page"
+      ></a>
+      <a
+        href="parc2"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Parcelamentos</a
+      >
+    </div>
+  </div>
+</nav>
+
+<div class="relative overflow-x-auto max-w-5xl mx-auto mt-8">
+  <app-modalcadoutroscredores
+    [showModal3]="showModal3"
+    [item]="selectedItem"
+    (close)="closeModal()"
+    (save)="saveData()"
+  ></app-modalcadoutroscredores>
+  <app-incrementaroutroscredores
+    [showModal5]="showModal5"
+    [item]="selectedItem"
+    (close)="closeModal()"
+    (save)="saveData()"
+  ></app-incrementaroutroscredores>
+
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-14"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th
+          scope="col"
+          class="px-6 py-3 text-center align-middle"
+          (click)="sortTable('cod')"
+        >
+          Código
+        </th>
+        <th scope="col" class="px-6 py-3" (click)="sortTable('datadacompra')">
+          Data
+        </th>
+
+        <th
+          scope="col"
+          class="px-6 py-3 text-center align-middle"
+          (click)="sortTable('descricao')"
+        >
+          Descrição
+        </th>
+        <th
+          scope="col"
+          class="px-6 py-3 text-center align-middle"
+          (click)="sortTable('valordacompra')"
+        >
+          Saldo
+        </th>
+
+        <th scope="col" class="px-6 py-3">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+        *ngFor="let item of this.oc()"
+      >
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center align-middle"
+        >
+          {{ item.cod }}
+        </th>
+        <td class="px-6 py-4">
+          {{ item.data?.toDate() | date : "dd/MM/yyyy" }}
+        </td>
+
+        <td class="px-6 py-4">
+          {{ item.descricao }}
+        </td>
+
+        <td class="px-6 py-4 text-center align-middle">
+          {{ item.saldo | currency : "BRL" }}
+        </td>
+
+        <td class="px-6 py-4">
+          <button (click)="incrementar(item)">
+            <svg
+              class="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6V18M6 12H18"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

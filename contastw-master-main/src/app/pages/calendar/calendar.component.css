@@ -1,0 +1,63 @@
+.calendar-container {
+    padding-bottom: 2rem;
+    width: 100%;
+   max-width: none; /*Garante que o max-width não vai impedir ele de expandir*/
+  
+    .calendar-content {
+        display: grid;
+       
+        grid-template-columns: repeat(7, 1fr);
+        width: 100%;
+  
+        .calendar-header {
+            padding: 0.25rem;
+            text-align: center;
+            font-weight: bold;
+  
+        }
+  
+        .calendar-body {
+            min-height: 6rem;
+  
+            padding: 0.25rem;
+            flex: 1 0 14.28%; /* 7 dias na semana, cada um ocupa aproximadamente 1/7 da largura */
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align: center;
+  
+            &:not(.current-month) {
+                &:nth-of-type(7n +1) {
+                    span {
+                        color: #ff404066;
+                    }
+                }
+  
+                span {
+                    color: #33333366;
+                }
+            }
+  
+            &.current-day {
+                /* Adicionando o contorno azul no calendar-body */
+                border: 2px solid blue;
+                
+                span {
+                    width: 1.7rem;
+                    height: 1.7rem;
+                    border-radius: 50%;
+                    background-color: #135de6;
+                    padding: 0.025rem;
+                    display: grid;
+                    place-content: center;
+                    color: white;
+                }
+            }
+        }
+    }
+  
+    .valor{
+      text-align:left;
+      color: red;
+      font-size: smaller;
+    }
+  }

@@ -1,0 +1,399 @@
+<nav class="bg-gray-600 w-full">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-center">
+      <!-- Alterado justify-between para justify-center -->
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="block size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+          <svg
+            class="hidden size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center"
+      >
+        <!-- Alterado justify-start para justify-center -->
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              class="bg-gray-600 px-3 py-2 text-sm font-medium text-white"
+              aria-current="page"
+              >Agregados 2026</a
+            >
+
+            <button
+              class="text-white bg-purple-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
+              Posição {{ log1?.toDate() | date : "dd/MM/yyyy HH:mm" }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      ></div>
+    </div>
+  </div>
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+      <a
+        href="#"
+        class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+        aria-current="page"
+      ></a>
+      <a
+        href="parc2"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Parcelamentos</a
+      >
+    </div>
+  </div>
+</nav>
+
+<div *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="container max-w-5xl mx-auto flex justify-center mt-6">
+  <table class="min-w-full bg-white border-separate mb-16">
+    <thead class="py-2 px-4 border-b cursor-pointer text-left">
+      <tr>
+        <th class="py-2 px-4 border-b cursor-pointer border-r border-gray-300">
+          #
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer items-center"
+          (click)="sortTable('cod')"
+        >
+          Código
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer"
+          (click)="sortTable('conta')"
+        >
+          Agregado
+        </th>
+
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('saldo')"
+        >
+          Jan
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Fev
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Mar
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Abr
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Mai
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Jun
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Jul
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Ago
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Set
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Out
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Nov
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Dez
+        </th>
+        <th
+          class="py-2 px-4 border-l cursor-pointer text-center border-gray-300"
+          (click)="sortTable('valor')"
+        >
+          Total
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of this.agreg; let i = index" class="text-sm">
+        <td class="py-2 px-4 border-b border-r text-sm border-gray-300 italic">
+          {{ i + 1 }}
+        </td>
+        <td class="py-2 px-4 border-b items-center">{{ item.cod }}</td>
+        <td class="py-2 px-4 border-b">{{ item.agregado }}</td>
+
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.jan | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.fev | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.mar | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.abr | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.mai | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.jun | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.jul | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.ago | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.set | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.out | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.nov | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+          {{ item.ano2026.dez | currency : "BRL" }}
+        </td>
+        <td class="py-2 px-4 border-b font-bold text-right">
+          {{ item.ano2026.total | currency : "BRL" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container max-w-5xl mx-auto flex justify-center mt-6 mb-10">
+  <table class="min-w-full bg-white border-separate mb-16">
+    <thead class="py-2 px-4 border-b cursor-pointer text-left">
+      <tr>
+        <th class="py-2 px-4 border-b cursor-pointer border-r border-gray-300">
+          #
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer items-center"
+          (click)="sortTable('cod')"
+        >
+          Código
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer"
+          (click)="sortTable('conta')"
+        >
+          Agregado
+        </th>
+
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('saldo')"
+        >
+          Jan
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Fev
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Mar
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Abr
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Mai
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Jun
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Jul
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Ago
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Set
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Out
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Nov
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer text-center"
+          (click)="sortTable('valor')"
+        >
+          Dez
+        </th>
+        <th
+          class="py-2 px-4 border-l cursor-pointer text-center border-gray-300"
+          (click)="sortTable('valor')"
+        >
+          Total
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of this.agreg950; let i = index" class="text-sm">
+        <td class="py-2 px-4 border-b border-r text-sm border-gray-300 italic">
+          {{ i + 1 }}
+        </td>
+        <td class="py-2 px-4 border-b items-center">{{ item.cod }}</td>
+        <td class="py-2 px-4 border-b">{{ item.agregado }}</td>
+
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.jan | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.fev | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.mar | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.abr | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.mai | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.jun | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.jul | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.ago | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.set | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.out | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b text-right">
+          {{ item.ano2026.nov | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b border-r border-gray-300 text-right">
+          {{ item.ano2026.dez | number : "1.3-3" }}
+        </td>
+        <td class="py-2 px-4 border-b font-bold text-right">
+          {{ item.ano2026.total | number : "1.3-3" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

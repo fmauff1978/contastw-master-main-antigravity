@@ -1,0 +1,296 @@
+<!-- 
+botoes de pesquisa -->
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+  >
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+
+    <app-alert 
+[showAlert]="showAlert"
+[title]="alertTitle"
+[message]="alertMessage"
+[alertType]="alertType"
+(close)="closeAlert()"></app-alert>
+
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul
+        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+      >
+        <li>
+          <form class="max-w-md mx-auto" [formGroup]="formregistro">
+            <div class="relative">
+              <label
+                for="registro"
+                class="block w-24 text-sm font-medium text-gray-900 dark:text-white mr-2"
+                >Registro</label
+              >
+              <input
+                type="search"
+                id="default-search"
+                formControlName="registro"
+                class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="1724568970..."
+                required
+              />
+
+              <button
+                type="submit"
+                (click)="pesquisarReg()"
+                class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Buscar
+              </button>
+            </div>
+          </form>
+        </li>
+        <li>
+          <form class="max-w-md mx-auto" [formGroup]="formconta">
+            <label
+              for="default-search"
+              class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+              >Search</label
+            >
+            <div class="relative">
+              <label
+                for="contadebitada"
+                class="block w-24 text-sm font-medium text-gray-900 dark:text-white mr-2"
+                >Conta</label
+              >
+              <select
+                id="contadebitada"
+                formControlName="conta"
+                class="block w-full p-4 pl-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option value="">Selecione uma conta</option>
+                <option *ngFor="let cat of fonte1" value="{{ cat.conta }}">
+                  {{ cat.conta }}
+                </option>
+              </select>
+
+              <!-- <button
+                type="button"  (click)="pesquisar()"
+                class="text-white absolute end-2.5 bottom-2.5 
+                bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
+                 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Buscar
+              </button> -->
+            </div>
+          </form>
+        </li>
+
+        <li class="flex items-center">
+          <form
+            class="max-w-md mx-auto flex items-center"
+            [formGroup]="formdata"
+          >
+            <div class="relative">
+              <label
+                for="registro"
+                class="block w-24 text-sm font-medium text-gray-900 dark:text-white mr-2"
+                >Faixa de Datas</label
+              >
+            </div>
+
+            <input
+              type="date"
+              id="data"
+              formControlName="datainicio"
+              class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+            <span class="mx-4 text-gray-500">até</span>
+            <input
+              type="date"
+              id="datafinal"
+              formControlName="datafim"
+              class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+
+            <button
+              type="submit"
+              (click)="pesquisarDatas()"
+              class="ml-4 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
+              Buscar
+            </button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- botoes de cadastrar lancamentos -->
+<nav class="bg-white border-gray-200">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+  >
+    <h1
+      class="mb-3 text-lg text-black-500 md:text-xl dark:text-gray-400 mt-2 mr-10"
+    >
+      Lançar Comandos
+    </h1>
+    <ul
+      class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+    >
+      <li>
+        <button
+          type="button"
+          routerLink="/cadlctos"
+          class="text-white bg-green-900 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          Conta pra Conta
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          routerLink="/cred-uma"
+          class="text-white bg-green-700 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          Debitando Várias e Creditando Uma
+        </button>
+      </li>
+
+      <li>
+        <button
+          type="button"
+          routerLink="/deb-uma"
+          class="text-white bg-green-500 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          Creditando Várias e Debitando Uma
+        </button>
+      </li>
+
+      <li>
+        <button
+          type="button"
+          routerLink="/fopag"
+          class="text-black bg-green-300 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          FOPAG
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mx-auto mt-8">
+  <table class="min-w-full bg-white">
+    <thead class="py-2 px-4 border-b cursor-pointer text-left">
+      <tr>
+        <th
+          class="py-2 px-4 border-b cursor-pointer"
+          (click)="sortTable('reg')"
+        >
+          Registro
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer"
+          (click)="sortTable('datalcto')"
+        >
+          Data
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer"
+          (click)="sortTable('descricao')"
+        >
+          Descricao
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer"
+          (click)="sortTable('debito')"
+        >
+          Debito
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer"
+          (click)="sortTable('credito')"
+        >
+          Crédito
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer"
+          (click)="sortTable('valor')"
+        >
+          Valor
+        </th>
+        <th
+          class="py-2 px-4 border-b cursor-pointer"
+          (click)="sortTable('valor')"
+        >
+          Ações
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let item of fonte0 | paginate : { itemsPerPage: 10, currentPage: p }
+        "
+      >
+        <td class="py-2 px-4 border-b">{{ item.reg }}</td>
+        <td class="py-2 px-4 border-b">
+          {{ item.datalcto?.toDate() | date : "dd/MM/yyyy" }}
+        </td>
+        <td class="py-2 px-4 border-b">{{ item.descricao }}</td>
+        <td class="py-2 px-4 border-b">{{ item.contadebitada.conta }}</td>
+        <td class="py-2 px-4 border-b">{{ item.contacreditada.conta }}</td>
+        <td class="py-2 px-4 border-b">{{ item.valor | currency : "BRL" }}</td>
+        <td class="py-2 px-4 border-b">
+          <button (click)="excluirData(item)">
+            <svg
+              class="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="flex justify-center mt-4">
+    <pagination-controls
+      previousLabel="Anterior"
+      nextLabel="Próximo"
+      (pageChange)="p = $event"
+    ></pagination-controls>
+  </div>
+</div>

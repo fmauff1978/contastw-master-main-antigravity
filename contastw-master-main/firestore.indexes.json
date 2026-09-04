@@ -1,0 +1,1033 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "agenda",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "agendado_para",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "agenda",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "agendado_para",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "atg",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "gd",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enquadramento",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enq",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enquadramento",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enquadramento",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "saldo",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "saldo",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "mod_despesa",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "saldo",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "gd",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "saldo",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enquadramento",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enquadramento",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "saldo",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cod",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "mod_despesa",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enq",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enquadramento",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enquadramento",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "mod_despesa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "mod_despesa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "mod_despesa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "saldo",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ebqconta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enq",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enquadramento",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enquadramento",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "em_uso",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "saldo",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contas2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "conta_debitada",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datadolancamento",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "conta_debitada.mod_desp",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "valor",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contacreditada.conta",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "contadebitada.conta",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contacreditada.conta",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contacreditada.natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contacreditada.natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contadebitada.cod",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contadebitada.conta",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contadebitada.conta",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contadebitada.enquadramento",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contadebitada.mod_despesa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contadebitada.natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contadebitada.natureza",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "contadebitada.conta",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "lancamentos2025",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "datalcto",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "contadebitada.mod_despesa",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "parcelamentos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "datadacompra",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "parcelamentos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "enq",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "saldorestante",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "parcelamentos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "parcelasrestantes",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "parcelamentos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "saldorestante",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "parcelamentos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ultimaparcela",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "parcelamentos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ativa",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "valorparcela",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "shdesprec",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "enq",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "conta",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "shdesprec",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "enq",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "total24",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "shdesprec",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "enq",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "total24",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "shdesprec",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "total24",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "enq",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "sub_agregados",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "descricao",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cod",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

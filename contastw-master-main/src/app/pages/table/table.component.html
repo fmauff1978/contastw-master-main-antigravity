@@ -1,0 +1,97 @@
+<div class='flex items-center justify-center min-h-screen from-teal-100 via-teal-300 to-teal-500 bg-gradient-to-br mb-4'>
+    <div class='flex w-full max-w-screen-xl px-10 py-8 mx-auto gap-8 mb-4'>
+      <!-- LADO ESQUERDO: ATIVO -->
+      <div class='w-1/2 bg-white rounded-lg shadow-xl'>
+        <div class='space-y-6 p-6'>
+          <div class='text-base text-center leading-7'>
+            <p class="font-medium text-lg">Ativo</p>
+          </div>
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead>
+                <tr>
+                  <th scope="col" class="px-6 py-3">Código</th>
+                  <th scope="col" class="px-6 py-3">Conta</th>
+                  <th scope="col" class="px-6 py-3 text-right">Saldo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of items; let i = index"
+                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <td class="px-6 py-4">{{ item.cod }}</td>
+                  <td class="px-6 py-4">{{ item.conta }}</td>
+                  <td class="px-6 py-4 text-right">{{ item.saldo | currency : "BRL" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- LADO DIREITO: PASSIVO E RESULTADO -->
+      <div class='w-1/2 bg-white rounded-lg shadow-xl'>
+        <div class='space-y-6 p-6'>
+          <!-- PASSIVO -->
+          <div>
+            <div class='text-base text-center leading-7 mb-4'>
+              <p class="font-medium text-lg">Passivo</p>
+            </div>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead>
+                  <tr>
+                    <th scope="col" class="px-6 py-3">Código</th>
+                    <th scope="col" class="px-6 py-3">Conta</th>
+                    <th scope="col" class="px-6 py-3 text-right">Saldo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of items2; let i = index"
+                      class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <td class="px-6 py-4">{{ item.cod }}</td>
+                    <td class="px-6 py-4">{{ item.conta }}</td>
+                    <td class="px-6 py-4 text-right">{{ item.saldo*(-1) | currency : "BRL" }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- RESULTADO -->
+          <div class="border-t pt-6">
+            <div class='text-base text-center leading-7 mb-4'>
+              <p class="font-medium text-lg">Resultado</p>
+            </div>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead>
+                  <tr>
+                    <th scope="col" class="px-6 py-3">Código</th>
+                    <th scope="col" class="px-6 py-3">Conta</th>
+                    <th scope="col" class="px-6 py-3 text-right">Saldo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of items3; let i = index"
+                      class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <td class="px-6 py-4">{{ item.cod }}</td>
+                    <td class="px-6 py-4">{{ item.conta }}</td>
+                    <td class="px-6 py-4 text-right">{{ item.saldo*(-1) | currency : "BRL" }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+

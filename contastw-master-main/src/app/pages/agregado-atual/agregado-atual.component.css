@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  overflow-x: hidden;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem !important;
+}
+
+thead th,
+tbody td {
+  white-space: nowrap;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+th,
+td {
+  padding: 0.35rem 0.5rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+:host table th:last-child,
+:host table td:last-child {
+  border-left: 1px solid #d1d5db;
+}

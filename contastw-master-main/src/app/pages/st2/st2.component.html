@@ -1,0 +1,211 @@
+<div
+  class="min-h-screen bg-gray-50/50 dark:bg-gray-900/50 py-8 px-4 sm:px-6 lg:px-8 w-full"
+>
+  <div class="w-full max-w-full space-y-6">
+    <!-- Cabeçalho Principal da Página -->
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2"
+    >
+      <div>
+        <div class="flex items-center gap-2 mb-1"></div>
+        <h1
+          class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+          Gráficos: Contas de Resultado
+        </h1>
+      </div>
+
+      <!-- Posição da Base / Timestamp -->
+      <div class="flex items-center">
+        <span
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 shadow-sm"
+        >
+          <svg
+            class="w-4 h-4 text-indigo-600 dark:text-indigo-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span
+            >Posição:
+            <strong class="text-gray-900 dark:text-white">{{
+              posicao?.toDate() | date: "dd/MM/yyyy HH:mm"
+            }}</strong></span
+          >
+        </span>
+      </div>
+    </div>
+
+    <!-- Grid de Gráficos 1 & 2: Despesas e Receitas Acumuladas (Lado a Lado) -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Card Gráfico 1: Despesas Líquidas Acumuladas -->
+      <div
+        class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6 flex flex-col justify-between"
+      >
+        <div
+          class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+        >
+          <div class="flex items-center gap-2.5">
+            <div class="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
+            <h2 class="text-base font-bold text-gray-900 dark:text-white">
+              Despesas Líquidas Acumuladas Mensalmente
+            </h2>
+          </div>
+          <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+            >Comparativo Anual</span
+          >
+        </div>
+        <div class="w-full pt-2">
+          <p-chart
+            type="line"
+            [data]="data"
+            [options]="options"
+            styleClass="w-full h-[24rem]"
+          ></p-chart>
+        </div>
+      </div>
+
+      <!-- Card Gráfico 2: Receitas Líquidas Acumuladas -->
+      <div
+        class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6 flex flex-col justify-between"
+      >
+        <div
+          class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+        >
+          <div class="flex items-center gap-2.5">
+            <div class="w-2.5 h-2.5 rounded-full bg-blue-500"></div>
+            <h2 class="text-base font-bold text-gray-900 dark:text-white">
+              Receitas Líquidas Acumuladas Mensalmente
+            </h2>
+          </div>
+          <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+            >Comparativo Anual</span
+          >
+        </div>
+        <div class="w-full pt-2">
+          <p-chart
+            type="line"
+            [data]="data2"
+            [options]="options"
+            styleClass="w-full h-[24rem]"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráfico 3: Receitas x Despesas Líquidas (Largura Total) -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-purple-500"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            Receitas vs. Despesas Líquidas
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Fluxo Contínuo Mensal</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="line"
+          [data]="data3"
+          [options]="options"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico 4: Despesas Agregadas por Ano (Largura Total) -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            Despesas Agregadas por Ano
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Centros de Custo Agrupados</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="bar"
+          [data]="data4"
+          [options]="options4"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico 5: Despesas Familiares, Lazer e Ordinárias (Largura Total) -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            Despesas Familiares, Lazer e Ordinárias
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Evolução Mensal por Categoria</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="line"
+          [data]="data5"
+          [options]="options"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico 6: Mobilidade, Alimentação Fora e Educação (Largura Total) -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-cyan-500"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            Mobilidade, Alimentação Fora e Educação
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Evolução Mensal por Categoria</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="line"
+          [data]="data6"
+          [options]="options"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+  </div>
+</div>

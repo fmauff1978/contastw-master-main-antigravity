@@ -1,0 +1,439 @@
+<!-- Modais de Cadastro e Edição Previ -->
+<app-modalcad-previ
+  [showModal3]="showModal3"
+  [item]="selectedItem"
+  (close)="closeModal()"
+  (save)="saveData()"
+></app-modalcad-previ>
+
+<app-modal-previ
+  [showModal]="showModal"
+  [item]="selectedItem"
+  (close)="closeModal()"
+  (save)="saveData()"
+></app-modal-previ>
+
+<div
+  class="min-h-screen bg-gray-50/50 dark:bg-gray-900/50 py-8 px-4 sm:px-6 lg:px-8"
+>
+  <div class="max-w-7xl mx-auto space-y-6">
+    <!-- Cabeçalho Principal da Página -->
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2"
+    >
+      <div>
+        <div class="flex items-center gap-2 mb-1"></div>
+        <h1
+          class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+          Previ
+        </h1>
+      </div>
+
+      <!-- Botão de Ação Primária -->
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          (click)="incluir()"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-purple-600 hover:bg-purple-700 active:bg-purple-800 shadow-md shadow-purple-600/20 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
+          Adicionar Novo Mês
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards de Indicadores / Métricas (KPIs) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Card: Saldo Atual Acumulado -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400"
+            >
+              Saldo Atual
+            </span>
+            <div
+              class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white"
+            >
+              {{ ultimoSaldo() | currency: "BRL" }}
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/50"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="mt-3 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400"
+        >
+          <span class="font-medium text-indigo-600 dark:text-indigo-400"
+            >Última posição</span
+          >
+          <span>registrada no plano</span>
+        </div>
+      </div>
+
+      <!-- Card: Total Resgatável -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-rose-600 dark:text-rose-400"
+            >
+              Total Resgatável (90%)
+            </span>
+            <div
+              class="text-xl sm:text-2xl font-extrabold text-rose-600 dark:text-rose-400"
+            >
+              {{ resgate() || 0 | currency: "BRL" }}
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-rose-50 text-rose-600 dark:bg-rose-950/50 dark:text-rose-400 border border-rose-100 dark:border-rose-900/50"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="mt-3 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400"
+        >
+          <span class="font-medium text-rose-600 dark:text-rose-400"
+            >Disponível</span
+          >
+          <span>para resgate imediato</span>
+        </div>
+      </div>
+
+      <!-- Card: Rentabilidade Anual -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-purple-600 dark:text-purple-400"
+            >
+              Rentabilidade Anual
+            </span>
+            <div
+              class="text-xl sm:text-2xl font-extrabold text-purple-600 dark:text-purple-400"
+            >
+              {{ taxaano || 0 | number: "1.2-2" }}%
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-purple-50 text-purple-600 dark:bg-purple-950/50 dark:text-purple-400 border border-purple-100 dark:border-purple-900/50"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="mt-3 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400"
+        >
+          <span class="font-medium text-purple-600 dark:text-purple-400"
+            >Acumulada</span
+          >
+          <span>no período de {{ anoatual }}</span>
+        </div>
+      </div>
+
+      <!-- Card: Total de Contribuições -->
+    </div>
+
+    <!-- Tabela Principal de Histórico Previ -->
+    <div
+      class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 overflow-hidden"
+    >
+      <div class="overflow-x-auto">
+        <table
+          class="w-full text-left text-sm text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="bg-gray-50/80 dark:bg-gray-700/50 text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 tracking-wider border-b border-gray-200/80 dark:border-gray-700"
+          >
+            <tr>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-center">Mês</th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-right">
+                Saldo Inicial
+              </th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-right">
+                Contribuição
+              </th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-right">
+                Rendimentos
+              </th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-right">
+                Saldo Final
+              </th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-center">
+                Rentabilidade
+              </th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-700/60">
+            <tr
+              *ngFor="
+                let item of previ()
+                  | paginate: { itemsPerPage: 12, currentPage: p }
+              "
+              class="transition-colors duration-150 hover:bg-gray-50/80 dark:hover:bg-gray-700/40"
+              [ngClass]="
+                item.valor_atual === 0
+                  ? 'opacity-60 bg-gray-50/40'
+                  : 'bg-white dark:bg-gray-800'
+              "
+            >
+              <!-- Mês -->
+              <td class="py-4 px-4 sm:px-6 whitespace-nowrap text-center">
+                <span
+                  class="inline-flex items-center gap-1.5 font-bold text-gray-900 dark:text-white px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 text-xs"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  {{ item.mes?.toDate() | date: "MM/yyyy" }}
+                </span>
+              </td>
+
+              <!-- Saldo Inicial -->
+              <td
+                class="py-4 px-4 sm:px-6 text-right whitespace-nowrap text-gray-600 dark:text-gray-300 font-medium"
+              >
+                {{ item.saldo_inicial | currency: "BRL" }}
+              </td>
+
+              <!-- Contribuição -->
+              <td class="py-4 px-4 sm:px-6 text-right whitespace-nowrap">
+                <span
+                  class="font-semibold text-indigo-600 dark:text-indigo-400"
+                >
+                  {{ item.contribuicao | currency: "BRL" }}
+                </span>
+              </td>
+
+              <!-- Rendimentos -->
+              <td class="py-4 px-4 sm:px-6 text-right whitespace-nowrap">
+                <span
+                  class="font-semibold"
+                  [ngClass]="
+                    isOlderThanThreshold(item.rendimento)
+                      ? 'text-rose-600 dark:text-rose-400'
+                      : 'text-emerald-600 dark:text-emerald-400'
+                  "
+                >
+                  {{ item.rendimento | currency: "BRL" }}
+                </span>
+              </td>
+
+              <!-- Saldo Final -->
+              <td class="py-4 px-4 sm:px-6 text-right whitespace-nowrap">
+                <span class="font-bold text-base text-gray-900 dark:text-white">
+                  {{ item.saldo_final | currency: "BRL" }}
+                </span>
+              </td>
+
+              <!-- Rentabilidade (%) -->
+              <td class="py-4 px-4 sm:px-6 text-center whitespace-nowrap">
+                <span
+                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold"
+                  [ngClass]="
+                    isOlderThanThreshold(item.rentabilidade)
+                      ? 'bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300'
+                      : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300'
+                  "
+                >
+                  <svg
+                    *ngIf="!isOlderThanThreshold(item.rentabilidade)"
+                    class="w-3 h-3"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M5 10l7-7m0 0l7 7m-7-7v18"
+                    />
+                  </svg>
+                  <svg
+                    *ngIf="isOlderThanThreshold(item.rentabilidade)"
+                    class="w-3 h-3"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                    />
+                  </svg>
+                  {{ item.rentabilidade | percent: "1.2-2" }}
+                </span>
+              </td>
+
+              <!-- Ações -->
+              <td class="py-4 px-4 sm:px-6 text-center whitespace-nowrap">
+                <button
+                  type="button"
+                  (click)="editarData(item)"
+                  title="Editar registro do mês"
+                  class="p-2 rounded-xl text-purple-600 hover:text-purple-700 bg-purple-50 hover:bg-purple-100 dark:bg-purple-950/40 dark:text-purple-400 dark:hover:bg-purple-900/60 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                    />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+
+            <!-- Estado Vazio -->
+            <tr *ngIf="previ().length === 0">
+              <td colspan="7" class="py-12 text-center">
+                <div
+                  class="flex flex-col items-center justify-center space-y-3"
+                >
+                  <div
+                    class="p-3 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
+                  >
+                    <svg
+                      class="w-8 h-8"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="text-base font-medium text-gray-900 dark:text-white"
+                  >
+                    Nenhum registro encontrado
+                  </div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 max-w-sm">
+                    Você ainda não possui registros mensais cadastrados para o
+                    plano Previ.
+                  </p>
+                  <div class="pt-2">
+                    <button
+                      type="button"
+                      (click)="incluir()"
+                      class="text-xs font-semibold bg-purple-50 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 px-4 py-2 rounded-xl hover:bg-purple-100 transition"
+                    >
+                      + Cadastrar Primeiro Mês
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rodapé / Controles de Paginação -->
+      <div
+        class="bg-gray-50/80 dark:bg-gray-700/40 px-4 sm:px-6 py-4 border-t border-gray-200/80 dark:border-gray-700 flex flex-col sm:flex-row items-center justify-between gap-4"
+      >
+        <div class="text-xs text-gray-500 dark:text-gray-400">
+          Total de
+          <span class="font-semibold text-gray-700 dark:text-gray-200">{{
+            previ().length
+          }}</span>
+          meses registrados
+        </div>
+
+        <div class="flex justify-center">
+          <pagination-controls
+            previousLabel="Anterior"
+            nextLabel="Próximo"
+            (pageChange)="p = $event"
+            class="custom-pagination"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

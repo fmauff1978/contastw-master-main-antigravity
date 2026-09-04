@@ -1,0 +1,261 @@
+<nav class="bg-gray-600 w-full">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-center">
+      <!-- Alterado justify-between para justify-center -->
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="block size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+          <svg
+            class="hidden size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center"
+      >
+        <!-- Alterado justify-start para justify-center -->
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              class="bg-gray-600 px-3 py-2 text-sm font-medium text-white"
+              aria-current="page"
+              >Cadastramento de Arquivo de Lançamentos/Indices Economicos</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      ></div>
+    </div>
+  </div>
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+      <a
+        href="#"
+        class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+        aria-current="page"
+      ></a>
+      <a
+        href="up"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Upload de Dados</a
+      >
+    </div>
+  </div>
+</nav>
+
+<!-- <button (click)="gerarLctos()">Gravar Lançamento</button> -->
+
+<div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+  <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+    Upload de lançamentos agrupados
+  </h2>
+
+  <app-alert
+    [showAlert]="showAlert"
+    [title]="alertTitle"
+    [message]="alertMessage"
+    [alertType]="alertType"
+    (close)="closeAlert()"
+  ></app-alert>
+
+  <div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+  </div>
+  <form [formGroup]="jsonForm" (ngSubmit)="onSubmit()" class="mb-8">
+    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+      <div class="sm:col-span-2">
+        <textarea
+          id="jsonData"
+          formControlName="jsonData"
+          rows="10"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          placeholder='Exemplo: [{"id": 1, "nome": "Item A"}, {"id": 2, "nome": "Item B"}]'
+        ></textarea>
+
+        <div
+          *ngIf="
+            jsonForm.get('jsonData')?.invalid &&
+            jsonForm.get('jsonData')?.touched
+          "
+          class="error-message"
+        >
+          <span *ngIf="jsonForm.get('jsonData')?.errors?.['required']"
+            >Este campo é obrigatório.</span
+          >
+          <span *ngIf="jsonForm.get('jsonData')?.errors?.['invalidJson']"
+            >JSON inválido. Por favor, verifique a sintaxe.</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="jsonForm.invalid"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 mt-6 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      Subir Lançamentos
+    </button>
+  </form>
+
+  <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+    Cadastramento de Indices Economicos (Base Inicial Jun 2025)
+  </h2>
+
+  <h4 class="text-l text-purple mb-4">
+    AUM IPCA Necessário 2034: {{ this.aposent1 | currency: "BRL" }}
+    <span class="italic text-sm">[base receita liquida anual 2023]</span>
+  </h4>
+
+  <app-indice-econ
+    [showModal]="showModal"
+    [item]="selectedItem"
+    (close)="closeModal()"
+    (save)="saveData()"
+  ></app-indice-econ>
+
+  <table class="min-w-full w-full bg-white">
+    <thead class="py-2 px-4 border-b cursor-pointer text-left">
+      <tr>
+        <th class="py-2 px-4 border-b cursor-pointer">Código</th>
+        <th class="py-2 px-4 border-b cursor-pointer">Indice</th>
+
+        <th class="py-2 px-4 border-b cursor-pointer">Valorizacao Acumulada</th>
+
+        <th class="py-2 px-4 border-b cursor-pointer">Posição</th>
+        <th class="py-2 px-4 border-b cursor-pointer">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of indices">
+        <td class="py-2 px-4 border-b">{{ item.reg }}</td>
+        <td class="py-2 px-4 border-b">{{ item.nome }}</td>
+        <td class="py-2 px-4 border-b">
+          {{ item.vlr_acumulado | number: "1.2-2" : "pt-BR" }}%
+        </td>
+        <td class="py-2 px-4 w-48 border-b">
+          {{ item.posicao.toDate() | date: "MM/yyyy" }}
+        </td>
+
+        <td class="py-2 px-4 text-center border-b">
+          <button (click)="incrementar(item)">
+            <svg
+              class="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6V18M6 12H18"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 class="mb-4 text-xl font-bold text-gray-900 dark:text-white mt-8">
+    Demais indicadores de referência
+  </h4>
+  <app-demais-indices
+    [showModal2]="showModal2"
+    [item]="selectedItem2"
+    (close)="closeModal()"
+    (save)="saveData()"
+  ></app-demais-indices>
+
+  <table class="min-w-full w-full bg-white">
+    <thead class="py-2 px-4 border-b cursor-pointer text-left">
+      <tr>
+        <th class="py-2 px-4 border-b cursor-pointer">Código</th>
+        <th class="py-2 px-4 border-b cursor-pointer">Indice</th>
+
+        <th class="py-2 px-4 border-b cursor-pointer">Projeção 2034</th>
+
+        <th class="py-2 px-4 border-b cursor-pointer">Posição</th>
+        <th class="py-2 px-4 border-b cursor-pointer">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of indices2">
+        <td class="py-2 px-4 border-b">{{ item.reg }}</td>
+        <td class="py-2 px-4 border-b">{{ item.nome }}</td>
+        <td class="py-2 px-4 border-b">
+          {{ item.projecao | currency: "BRL" }}
+        </td>
+        <td class="py-2 px-4 w-48 border-b">
+          {{ item.posicao.toDate() | date: "MM/yyyy" }}
+        </td>
+
+        <td class="py-2 px-4 text-center border-b">
+          <button (click)="incrementar2(item)">
+            <svg
+              class="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6V18M6 12H18"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

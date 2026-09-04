@@ -1,0 +1,163 @@
+<div class="py-8 px-4 mx-auto max-w-6xl lg:py-16">
+
+    <app-spinner></app-spinner>
+
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Lançar FOPAG</h2>
+       
+    </div>
+
+    <app-alert 
+    [showAlert]="showAlert"
+    [title]="alertTitle"
+    [message]="alertMessage"
+    [alertType]="alertType"
+    (close)="closeAlert()"></app-alert>
+
+    <form [formGroup]="meuForm" (ngSubmit)="onSubmit()">
+        <div class="flex justify-left">
+            <div class="mb-6 w-48">
+                <label for="data" class="block text-gray-700 text-sm font-medium mb-4">Data:</label>
+                <input type="date" id="data" formControlName="data" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border-gray-300 focus:outline-none focus:shadow-outline">        
+            </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-left gap-10 mb-6">
+            <div class="w-auto">
+                <label for="previ" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Previ</label>
+                <input type="number" formControlName="previ" name="previ" id="previ"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+            <div class="w-auto">
+                <label for="previ2b" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Previ2b</label>
+                <input type="number" formControlName="previ2b" name="previ2b" id="previ2b"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+             <div class="w-auto">
+                <label for="inss" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">INSS</label>
+                <input type="number" formControlName="inss" name="inss" id="inss"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+            
+            <div class="w-auto">
+                <label for="ir" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">IR</label>
+                <input type="number" formControlName="ir" name="ir" id="ir"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+             <div class="w-auto">
+              <label for="fgts" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">FGTS</label>
+              <input type="number" formControlName="fgts" name="fgts" id="fgts"
+               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                focus:ring-primary-600 focus:border-primary-600 
+                block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+            <div class="w-auto">
+                <label for="cassi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cassi</label>
+                <input type="number" formControlName="cassi" name="cassi" id="cassi"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+            <div class="w-auto">
+                <label for="mimha" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CoParticipação Minha</label>
+                <input type="number" formControlName="minha" name="mimha" id="mimha"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+            <div class="w-auto">
+                <label for="rosa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CoParticipação Rosa</label>
+                <input type="number" formControlName="rosa" name="rosa" id="rosa"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+            <div class="w-auto">
+                <label for="fupilipe" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CoParticipação Filho</label>
+                <input type="number" formControlName="fupilipe" name="fupilipe" id="fupilipe"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+             <div class="w-auto">
+                <label for="consig" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consig Trabalhador</label>
+                <input type="number" formControlName="consig" name="consig" id="consig"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+           
+        </div> 
+        
+        <div class="flex flex-wrap items-center justify-left gap-10 mt-10">
+           
+
+            <div class="w-auto">
+                <label for="contsind" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contribuições Sindicais</label>
+                <input type="number" formControlName="contsind" name="contsind" id="contsind"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+            <div class="w-auto">
+                <label for="esprevi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empréstimo Simples Previ</label>
+                <input type="number" formControlName="esprevi" name="esprevi" id="esprevi"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+            <div class="w-auto">
+                <label for="previ13" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Previ 13º Salário</label>
+                <input type="number" formControlName="previ13" name="previ13" id="previ13"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+            
+            <div class="w-auto">
+                <label for="prov" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provisões</label>
+                <input type="number" formControlName="prov" name="prov" id="prov"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                  focus:ring-primary-600 focus:border-primary-600 
+                  block p-2.5 dark:bg-gray-700 dark:border-gray-600
+                   dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="R$ 1.200,00" required="">
+            </div>
+
+            <div class="w-full mt-10">
+             <button type="button" (click)="onSubmit()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 
+        py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Gravar FOPAG</button></div>
+        </div>
+    </form>
+</div>

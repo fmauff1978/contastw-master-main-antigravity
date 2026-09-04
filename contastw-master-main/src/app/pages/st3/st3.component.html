@@ -1,0 +1,208 @@
+<div
+  class="min-h-screen bg-gray-50/50 dark:bg-gray-900/50 py-8 px-4 sm:px-6 lg:px-8 w-full"
+>
+  <div class="w-full max-w-full space-y-6">
+    <!-- Cabeçalho Principal da Página -->
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2"
+    >
+      <div>
+        <div class="flex items-center gap-2 mb-1"></div>
+        <h1
+          class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+          Gráficos: Contas Patrimoniais
+        </h1>
+      </div>
+
+      <!-- Posição da Base / Timestamp -->
+      <div class="flex items-center">
+        <span
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 shadow-sm"
+        >
+          <svg
+            class="w-4 h-4 text-indigo-600 dark:text-indigo-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span
+            >Posição:
+            <strong class="text-gray-900 dark:text-white">{{
+              posicao?.toDate() | date: "dd/MM/yyyy HH:mm"
+            }}</strong></span
+          >
+        </span>
+      </div>
+    </div>
+
+    <!-- Gráfico 1: Ativo Total x AUM x Passivo Total -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-indigo-600"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            Ativo Total vs. AUM vs. Passivo Total
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Balanço Patrimonial Histórico</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="line"
+          [data]="data"
+          [options]="ativpassaum"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico 2: AUM 2034 x Metas & Renda Passiva -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            AUM 2034 x Metas & Renda Passiva
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Projeção Futura</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="line"
+          [data]="data3"
+          [options]="options"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico 3: Passivo (Sem PAL) -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            Passivo (Sem PAL) - Meta vs. Realizado
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Evolução Mensal</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="line"
+          [data]="data2"
+          [options]="options2"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico 4: Dívidas Pagas Acumuladas -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-teal-500"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            Dívidas Pagas Acumuladas Mensalmente (Sem juros financ.)
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Amortização Acumulada</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="line"
+          [data]="pagtopass"
+          [options]="options15"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico 5: Composição: Passivo Total vs. PAL -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            Composição: Passivo Total vs. PAL
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Barras Empilhadas e Índices (%)</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="bar"
+          [data]="data4"
+          [options]="palvspassivo"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+
+    <!-- Gráfico 6: Histórico de Indicadores Econômicos -->
+    <div
+      class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 p-6"
+    >
+      <div
+        class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-violet-600"></div>
+          <h2 class="text-base font-bold text-gray-900 dark:text-white">
+            Histórico de Indicadores Econômicos
+          </h2>
+        </div>
+        <span class="text-xs text-gray-400 dark:text-gray-500 font-medium"
+          >Série Histórica Anual (2001 - Presente)</span
+        >
+      </div>
+      <div class="w-full pt-2">
+        <p-chart
+          type="line"
+          [data]="data5"
+          [options]="options5"
+          styleClass="w-full h-[28rem]"
+        ></p-chart>
+      </div>
+    </div>
+  </div>
+</div>

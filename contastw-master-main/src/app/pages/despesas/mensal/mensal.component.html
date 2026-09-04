@@ -1,0 +1,385 @@
+<nav
+  class="bg-gray-600 w-full"
+  style="font-family: &quot;Roboto Mono&quot;, monospace"
+>
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-center">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="block size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+          <svg
+            class="hidden size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center"
+      >
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex items-center space-x-4">
+            <a
+              href="#"
+              class="bg-gray-600 px-3 py-2 text-xl font-medium text-white"
+              aria-current="page"
+              >Despesas e Receitas Mensais {{ ano }}</a
+            >
+
+            <div class="relative inline-block">
+              <!-- O seu botão original -->
+              <button
+                class="text-white bg-purple-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Posição {{ log1?.toDate() | date: "dd/MM/yyyy HH:mm" }}
+              </button>
+
+              <!-- 2. O Badge posicionado no canto superior direito -->
+            </div>
+
+            <button
+              type="button"
+              (click)="atualizarMes()"
+              class="text-white bg-green-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
+              Atualizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section
+  class="w-full px-2 py-4 sm:px-4"
+  style="font-family: &quot;Roboto Mono&quot;, monospace"
+>
+  <div
+    class="w-full overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm"
+  >
+    <table class="min-w-[1100px] w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th
+            scope="col"
+            class="px-4 py-3 text-left text-sm font-semibold text-gray-700"
+          >
+            Enquadramento
+          </th>
+          <th
+            scope="col"
+            class="px-4 py-3 text-left text-sm font-semibold text-gray-700"
+          >
+            Conta
+          </th>
+          <th
+            *ngFor="let mes of meses"
+            scope="col"
+            class="px-3 py-3 text-right text-sm font-semibold text-gray-700"
+          >
+            {{ mes | uppercase }}
+          </th>
+          <th
+            scope="col"
+            class="px-3 py-3 text-right text-sm font-semibold text-gray-700 border-l border-gray-300"
+          >
+            Total
+          </th>
+          <th
+            scope="col"
+            class="px-3 py-3 text-right text-sm font-semibold text-gray-700"
+          >
+            {{ anoant }}
+          </th>
+          <th
+            scope="col"
+            class="px-3 py-3 text-right text-sm font-semibold text-gray-700"
+          >
+            {{ anoant2 }}
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <ng-container *ngIf="contasAgrupadas.length; else vazio">
+          <ng-container *ngFor="let grupo of contasAgrupadas">
+            <tr
+              class="bg-gray-100"
+              [ngStyle]="{
+                'background-color':
+                  getGd2025PorGrupo(grupo) * dd < grupo.total
+                    ? 'peachpuff'
+                    : '',
+              }"
+            >
+              <td
+                class="px-4 py-3 text-sm font-semibold uppercase text-gray-700"
+              >
+                {{ grupo.enquadramento }}
+              </td>
+              <td
+                class="px-4 py-3 text-right text-sm font-semibold text-gray-700"
+              ></td>
+              <td
+                *ngFor="let mes of meses"
+                class="px-3 py-3 text-right text-sm font-semibold text-gray-700"
+                [ngClass]="{
+                  'text-red-600 font-bold':
+                    getTotalPorMes(grupo, mes) > grupo.total / this.mes,
+                }"
+              >
+                {{
+                  getTotalPorMes(grupo, mes)
+                    | currency: "BRL" : "symbol" : "1.2-2"
+                }}
+              </td>
+              <td
+                class="px-3 py-3 text-right text-sm font-semibold text-gray-700 border-l border-gray-300"
+              >
+                {{ grupo.total | currency: "BRL" : "symbol" : "1.2-2" }}
+              </td>
+              <td
+                class="px-3 py-3 text-right text-sm font-semibold text-gray-700"
+              >
+                {{
+                  getGd2025PorGrupo(grupo) * dd
+                    | currency: "BRL" : "symbol" : "1.2-2"
+                }}
+              </td>
+              <td
+                class="px-3 py-3 text-right text-sm font-semibold text-gray-700"
+              >
+                {{
+                  getGd2024PorGrupo(grupo) * dd
+                    | currency: "BRL" : "symbol" : "1.2-2"
+                }}
+              </td>
+            </tr>
+            <tr
+              *ngFor="let conta of grupo.contas"
+              class="hover:bg-gray-50"
+              [ngStyle]="{
+                'background-color':
+                  getGd2025DaConta(conta) * dd < getTotalDaConta(conta)
+                    ? 'peachpuff'
+                    : '',
+              }"
+            >
+              <td class="px-4 py-2"></td>
+              <td class="px-4 py-2 text-sm text-gray-800">{{ conta.conta }}</td>
+              <td
+                *ngFor="let mes of meses"
+                class="px-3 py-2 text-right text-sm text-gray-800"
+                [ngClass]="{
+                  'text-red-600 font-bold':
+                    conta[mes] > getTotalDaConta(conta) / this.mes,
+                }"
+              >
+                {{ conta[mes] | currency: "BRL" : "symbol" : "1.2-2" }}
+              </td>
+              <td
+                class="px-3 py-2 text-right text-sm text-gray-800 border-l border-gray-300"
+              >
+                {{
+                  getTotalDaConta(conta) | currency: "BRL" : "symbol" : "1.2-2"
+                }}
+              </td>
+              <td class="px-3 py-2 text-right text-sm text-gray-800">
+                {{
+                  getGd2025DaConta(conta) * dd
+                    | currency: "BRL" : "symbol" : "1.2-2"
+                }}
+              </td>
+               <td class="px-3 py-2 text-right text-sm text-gray-800">
+                {{
+                  getGd2024DaConta(conta) * dd
+                    | currency: "BRL" : "symbol" : "1.2-2"
+                }}
+              </td>
+            </tr>
+          </ng-container>
+          <tr
+            class="bg-gray-200 font-semibold"
+            [ngStyle]="{
+              'background-color':
+                getTotalGeralGd2025() * dd < getTotalGeral() ? 'peachpuff' : '',
+            }"
+          >
+            <td class="px-4 py-3 text-sm text-gray-700">Total geral</td>
+            <td class="px-4 py-3 text-right text-sm text-gray-700"></td>
+            <td
+              *ngFor="let mes of meses"
+              class="px-3 py-3 text-right text-sm text-gray-700"
+              [ngClass]="{
+                'text-red-600 font-bold':
+                  getTotalGeralPorMes(mes) > getTotalGeral() / this.mes,
+              }"
+            >
+              {{
+                getTotalGeralPorMes(mes) | currency: "BRL" : "symbol" : "1.2-2"
+              }}
+            </td>
+            <td
+              class="px-3 py-3 text-right text-sm text-gray-700 border-l border-gray-300"
+            >
+              {{ getTotalGeral() | currency: "BRL" : "symbol" : "1.2-2" }}
+            </td>
+            <td class="px-3 py-3 text-right text-sm text-gray-700">
+              {{ getTotalGeralGd2025() | currency: "BRL" : "symbol" : "1.2-2" }}
+            </td>
+             <td class="px-3 py-3 text-right text-sm text-gray-700">
+              {{ getTotalGeralGd2024() | currency: "BRL" : "symbol" : "1.2-2" }}
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-template #vazio>
+          <tr>
+            <td
+              colspan="14"
+              class="px-4 py-6 text-center text-sm text-gray-500"
+            >
+              Nenhuma conta encontrada.
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section
+  class="w-full px-2 py-4 sm:px-4"
+  style="font-family: &quot;Roboto Mono&quot;, monospace"
+>
+  <div
+    class="w-full overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm"
+  >
+    <div class="border-b border-gray-200 bg-gray-50 px-4 py-3">
+      <h2 class="text-lg font-semibold text-gray-700">Receitas</h2>
+    </div>
+    <table class="min-w-[1100px] w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th
+            scope="col"
+            class="px-4 py-3 text-left text-sm font-semibold text-gray-700"
+          >
+            Enquadramento
+          </th>
+          <th
+            scope="col"
+            class="px-4 py-3 text-left text-sm font-semibold text-gray-700"
+          >
+            Conta
+          </th>
+          <th
+            *ngFor="let mes of meses"
+            scope="col"
+            class="px-3 py-3 text-right text-sm font-semibold text-gray-700"
+          >
+            {{ mes | uppercase }}
+          </th>
+          <th
+            scope="col"
+            class="px-3 py-3 text-right text-sm font-semibold text-gray-700 border-l border-gray-300"
+          >
+            Total
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <ng-container
+          *ngIf="contasAgrupadasReceitas.length; else vazioReceitas"
+        >
+          <ng-container *ngFor="let grupo of contasAgrupadasReceitas">
+            <tr class="bg-gray-100">
+              <td
+                class="px-4 py-3 text-sm font-semibold uppercase text-gray-700"
+              >
+                {{ grupo.enquadramento }}
+              </td>
+              <td
+                class="px-4 py-3 text-right text-sm font-semibold text-gray-700"
+              ></td>
+              <td
+                *ngFor="let mes of meses"
+                class="px-3 py-3 text-right text-sm font-semibold text-gray-700"
+              >
+                {{
+                  getTotalPorMes(grupo, mes)
+                    | currency: "BRL" : "symbol" : "1.2-2"
+                }}
+              </td>
+              <td
+                class="px-3 py-3 text-right text-sm font-semibold text-gray-700 border-l border-gray-300"
+              >
+                {{ grupo.total | currency: "BRL" : "symbol" : "1.2-2" }}
+              </td>
+            </tr>
+            <tr *ngFor="let conta of grupo.contas" class="hover:bg-gray-50">
+              <td class="px-4 py-2"></td>
+              <td class="px-4 py-2 text-sm text-gray-800">{{ conta.conta }}</td>
+              <td
+                *ngFor="let mes of meses"
+                class="px-3 py-2 text-right text-sm text-gray-800"
+              >
+                {{ conta[mes] | currency: "BRL" : "symbol" : "1.2-2" }}
+              </td>
+              <td
+                class="px-3 py-2 text-right text-sm text-gray-800 border-l border-gray-300"
+              >
+                {{
+                  getTotalDaConta(conta) | currency: "BRL" : "symbol" : "1.2-2"
+                }}
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #vazioReceitas>
+          <tr>
+            <td
+              colspan="14"
+              class="px-4 py-6 text-center text-sm text-gray-500"
+            >
+              Nenhuma receita encontrada.
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+</section>

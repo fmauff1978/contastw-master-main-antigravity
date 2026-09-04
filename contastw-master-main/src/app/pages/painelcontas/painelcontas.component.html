@@ -1,0 +1,713 @@
+<!-- Alerta do Sistema -->
+<app-alert
+  [showAlert]="showAlert"
+  [title]="alertTitle"
+  [message]="alertMessage"
+  [alertType]="alertType"
+  (close)="closeAlert()"
+></app-alert>
+
+<!-- Modais de Edição e Criação -->
+<app-modal
+  [showModal]="showModal"
+  [item]="selectedItem"
+  (close)="closeModal()"
+  (save)="saveData($event)"
+></app-modal>
+
+<app-contas
+  [showModal2]="showModal2"
+  [item]="selectedItem"
+  (close)="closeModal()"
+  (save)="saveData($event)"
+></app-contas>
+
+<div
+  class="min-h-screen bg-gray-50/50 dark:bg-gray-900/50 py-8 px-4 sm:px-6 lg:px-8"
+>
+  <div class="max-w-7xl mx-auto space-y-6">
+    <!-- Cabeçalho Principal da Página -->
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2"
+    >
+      <div>
+        <div class="flex items-center gap-2 mb-1"></div>
+        <h1
+          class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+          Painel de Contas & Saldos
+        </h1>
+      </div>
+
+      <!-- Botão de Ação Primária -->
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          (click)="cadastrar()"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 shadow-md shadow-indigo-600/20 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
+          Nova Conta
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards de Indicadores / Métricas (KPIs) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Card: Saldo Consolidado Total -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400"
+            >
+              Saldo Consolidado
+            </span>
+            <div
+              class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white"
+            >
+              {{ saldoConsolidadoTotal | currency: "BRL" }}
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="mt-3 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400"
+        >
+          <span class="font-medium text-emerald-600 dark:text-emerald-400"
+            >Somatório</span
+          >
+          <span>de todas as contas cadastradas</span>
+        </div>
+      </div>
+
+      <!-- Card: Total de Contas -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400"
+            >
+              Total de Contas
+            </span>
+            <div
+              class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white"
+            >
+              {{ contas.length }}
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/50"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="mt-3 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400"
+        >
+          <span>contas mapeadas</span>
+        </div>
+      </div>
+
+      <!-- Card: Contas Ativas -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-teal-600 dark:text-teal-400"
+            >
+              Contas Ativas
+            </span>
+            <div
+              class="text-xl sm:text-2xl font-extrabold text-teal-600 dark:text-teal-400"
+            >
+              {{ contasAtivasCount }}
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-teal-50 text-teal-600 dark:bg-teal-950/50 dark:text-teal-400 border border-teal-100 dark:border-teal-900/50"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="mt-3 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400"
+        >
+          <span class="font-medium text-teal-600 dark:text-teal-400"
+            >Em uso</span
+          >
+          <span>disponíveis para lançamentos</span>
+        </div>
+      </div>
+
+      <!-- Card: Contas Inativas -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-5 shadow-sm border border-gray-200/80 dark:border-gray-700 transition hover:shadow-md"
+      >
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span
+              class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+            >
+              Contas Inativas
+            </span>
+            <div
+              class="text-xl sm:text-2xl font-extrabold text-slate-600 dark:text-slate-300"
+            >
+              {{ contasInativasCount }}
+            </div>
+          </div>
+          <div
+            class="rounded-xl p-3 bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="mt-3 flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400"
+        >
+          <span class="font-medium text-slate-600 dark:text-slate-400"
+            >Desativadas</span
+          >
+          <span>sem movimentação ativa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Filtros e Busca -->
+    <div
+      class="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-200/80 dark:border-gray-700 flex flex-col md:flex-row items-center justify-between gap-4"
+    >
+      <!-- Input de Busca Geral -->
+      <div class="relative w-full md:max-w-md">
+        <div
+          class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
+        <input
+          type="text"
+          [(ngModel)]="termoBuscaGlobal"
+          placeholder="Buscar por conta, código, natureza ou enquadramento..."
+          class="w-full pl-10 pr-4 py-2 text-sm bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+        />
+        <button
+          *ngIf="termoBuscaGlobal"
+          (click)="termoBuscaGlobal = ''"
+          class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+          title="Limpar busca"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Filtros Rápidos por Status (Pílulas) -->
+      <div
+        class="flex items-center gap-1.5 w-full md:w-auto overflow-x-auto pb-1 md:pb-0"
+      >
+        <button
+          type="button"
+          (click)="filtroStatus = 'todas'"
+          [ngClass]="
+            filtroStatus === 'todas'
+              ? 'bg-indigo-600 text-white shadow-sm'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+          "
+          class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap"
+        >
+          Todas ({{ contas.length }})
+        </button>
+        <button
+          type="button"
+          (click)="filtroStatus = 'ativas'"
+          [ngClass]="
+            filtroStatus === 'ativas'
+              ? 'bg-teal-600 text-white shadow-sm'
+              : 'bg-teal-50 text-teal-700 hover:bg-teal-100 dark:bg-teal-950/40 dark:text-teal-300 dark:hover:bg-teal-900/50'
+          "
+          class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5"
+        >
+          <span
+            class="w-1.5 h-1.5 rounded-full"
+            [ngClass]="filtroStatus === 'ativas' ? 'bg-white' : 'bg-teal-500'"
+          ></span>
+          Ativas ({{ contasAtivasCount }})
+        </button>
+        <button
+          type="button"
+          (click)="filtroStatus = 'inativas'"
+          [ngClass]="
+            filtroStatus === 'inativas'
+              ? 'bg-slate-700 text-white shadow-sm'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600'
+          "
+          class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5"
+        >
+          <span
+            class="w-1.5 h-1.5 rounded-full"
+            [ngClass]="
+              filtroStatus === 'inativas' ? 'bg-white' : 'bg-slate-400'
+            "
+          ></span>
+          Inativas ({{ contasInativasCount }})
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabela Principal de Contas -->
+    <div
+      class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200/80 dark:border-gray-700 overflow-hidden"
+    >
+      <div class="overflow-x-auto">
+        <table
+          class="w-full text-left text-sm text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="bg-gray-50/80 dark:bg-gray-700/50 text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 tracking-wider border-b border-gray-200/80 dark:border-gray-700 select-none"
+          >
+            <tr>
+              <th
+                scope="col"
+                class="py-3.5 px-4 sm:px-5 cursor-pointer hover:text-indigo-600 transition"
+                (click)="sortTable('cod')"
+              >
+                <div class="flex items-center gap-1">
+                  <span>Cód</span>
+                  <span *ngIf="sortKey === 'cod'">{{
+                    sortAsc ? "↑" : "↓"
+                  }}</span>
+                </div>
+              </th>
+              <th
+                scope="col"
+                class="py-3.5 px-4 sm:px-5 cursor-pointer hover:text-indigo-600 transition"
+                (click)="sortTable('conta')"
+              >
+                <div class="flex items-center gap-1">
+                  <span>Conta</span>
+                  <span *ngIf="sortKey === 'conta'">{{
+                    sortAsc ? "↑" : "↓"
+                  }}</span>
+                </div>
+              </th>
+              <th
+                scope="col"
+                class="py-3.5 px-4 sm:px-5 cursor-pointer hover:text-indigo-600 transition"
+                (click)="sortTable('natureza')"
+              >
+                <div class="flex items-center gap-1">
+                  <span>Natureza</span>
+                  <span *ngIf="sortKey === 'natureza'">{{
+                    sortAsc ? "↑" : "↓"
+                  }}</span>
+                </div>
+              </th>
+              <th
+                scope="col"
+                class="py-3.5 px-4 sm:px-5 cursor-pointer hover:text-indigo-600 transition"
+                (click)="sortTable('enquadramento')"
+              >
+                <div class="flex items-center gap-1">
+                  <span>Enquadramento</span>
+                  <span *ngIf="sortKey === 'enquadramento'">{{
+                    sortAsc ? "↑" : "↓"
+                  }}</span>
+                </div>
+              </th>
+              <th
+                scope="col"
+                class="py-3.5 px-4 sm:px-5 cursor-pointer hover:text-indigo-600 transition"
+                (click)="sortTable('mod_despesa')"
+              >
+                <div class="flex items-center gap-1">
+                  <span>Modalidade</span>
+                  <span *ngIf="sortKey === 'mod_despesa'">{{
+                    sortAsc ? "↑" : "↓"
+                  }}</span>
+                </div>
+              </th>
+              <th
+                scope="col"
+                class="py-3.5 px-4 sm:px-5 text-right cursor-pointer hover:text-indigo-600 transition"
+                (click)="sortTable('saldo')"
+              >
+                <div class="flex items-center justify-end gap-1">
+                  <span>Saldo Atual</span>
+                  <span *ngIf="sortKey === 'saldo'">{{
+                    sortAsc ? "↑" : "↓"
+                  }}</span>
+                </div>
+              </th>
+              <th
+                scope="col"
+                class="py-3.5 px-4 sm:px-5 cursor-pointer hover:text-indigo-600 transition"
+                (click)="sortTable('atualizacao')"
+              >
+                <div class="flex items-center gap-1">
+                  <span>Atualização</span>
+                  <span *ngIf="sortKey === 'atualizacao'">{{
+                    sortAsc ? "↑" : "↓"
+                  }}</span>
+                </div>
+              </th>
+              <th
+                scope="col"
+                class="py-3.5 px-4 sm:px-5 text-center cursor-pointer hover:text-indigo-600 transition"
+                (click)="sortTable('em_uso')"
+              >
+                <div class="flex items-center justify-center gap-1">
+                  <span>Status</span>
+                  <span *ngIf="sortKey === 'em_uso'">{{
+                    sortAsc ? "↑" : "↓"
+                  }}</span>
+                </div>
+              </th>
+              <th scope="col" class="py-3.5 px-4 sm:px-5 text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-700/60">
+            <tr
+              *ngFor="
+                let item of filteredContas
+                  | paginate: { itemsPerPage: 20, currentPage: p }
+              "
+              class="transition-colors duration-150 hover:bg-gray-50/80 dark:hover:bg-gray-700/40"
+              [ngClass]="
+                item.em_uso
+                  ? 'bg-white dark:bg-gray-800'
+                  : 'bg-gray-50/60 dark:bg-gray-900/30 opacity-70'
+              "
+            >
+              <!-- Código -->
+              <td class="py-3.5 px-4 sm:px-5 whitespace-nowrap">
+                <span
+                  class="font-mono text-xs font-bold px-2 py-1 rounded-md bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                >
+                  #{{ item.cod }}
+                </span>
+              </td>
+
+              <!-- Conta -->
+              <td class="py-3.5 px-4 sm:px-5">
+                <div class="flex flex-col">
+                  <span class="font-bold text-gray-900 dark:text-white text-sm">
+                    {{ item.conta }}
+                  </span>
+                  <span
+                    class="text-[11px] font-mono text-gray-400 dark:text-gray-500"
+                  >
+                    ID: {{ item.id }}
+                  </span>
+                </div>
+              </td>
+
+              <!-- Natureza -->
+              <td class="py-3.5 px-4 sm:px-5 whitespace-nowrap">
+                <span
+                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900/50 capitalize"
+                >
+                  {{ item.natureza || "—" }}
+                </span>
+              </td>
+
+              <!-- Enquadramento -->
+              <td class="py-3.5 px-4 sm:px-5 whitespace-nowrap">
+                <span
+                  class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300"
+                >
+                  {{ item.enquadramento || "—" }}
+                </span>
+              </td>
+
+              <!-- Modalidade Despesa -->
+              <td
+                class="py-3.5 px-4 sm:px-5 whitespace-nowrap text-xs text-gray-600 dark:text-gray-300 font-medium"
+              >
+                {{ item.mod_despesa || "—" }}
+              </td>
+
+              <!-- Saldo Atual -->
+              <td class="py-3.5 px-4 sm:px-5 text-right whitespace-nowrap">
+                <span
+                  class="font-bold text-sm"
+                  [ngClass]="
+                    item.saldo < 0
+                      ? 'text-rose-600 dark:text-rose-400'
+                      : 'text-gray-900 dark:text-white'
+                  "
+                >
+                  {{ item.saldo | currency: "BRL" }}
+                </span>
+              </td>
+
+              <!-- Atualização -->
+              <td
+                class="py-3.5 px-4 sm:px-5 whitespace-nowrap text-gray-500 dark:text-gray-400 text-xs"
+              >
+                {{ item.atualizacao | date: "dd/MM/yyyy" }}
+              </td>
+
+              <!-- Status (Ativa / Inativa) -->
+              <td class="py-3.5 px-4 sm:px-5 text-center whitespace-nowrap">
+                <span
+                  *ngIf="item.em_uso"
+                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Ativa
+                </span>
+                <span
+                  *ngIf="!item.em_uso"
+                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+                  Inativa
+                </span>
+              </td>
+
+              <!-- Ações -->
+              <td class="py-3.5 px-4 sm:px-5 text-center whitespace-nowrap">
+                <div class="flex items-center justify-center gap-1.5">
+                  <!-- Ativar / Desativar -->
+                  <button
+                    type="button"
+                    (click)="excluirData(item)"
+                    [title]="
+                      item.em_uso
+                        ? 'Desativar conta (requer saldo zerado)'
+                        : 'Ativar conta'
+                    "
+                    class="p-2 rounded-xl transition-colors cursor-pointer focus:outline-none focus:ring-2"
+                    [ngClass]="
+                      item.em_uso
+                        ? 'text-amber-600 hover:text-amber-700 bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/40 dark:text-amber-400 dark:hover:bg-amber-900/60 focus:ring-amber-500'
+                        : 'text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-400 dark:hover:bg-emerald-900/60 focus:ring-emerald-500'
+                    "
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M12 3v9"
+                      />
+                    </svg>
+                  </button>
+
+                  <!-- Editar -->
+                  <button
+                    type="button"
+                    (click)="editarData(item)"
+                    title="Editar conta"
+                    class="p-2 rounded-xl text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/40 dark:text-indigo-400 dark:hover:bg-indigo-900/60 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Estado Vazio -->
+            <tr *ngIf="filteredContas.length === 0">
+              <td colspan="9" class="py-12 text-center">
+                <div
+                  class="flex flex-col items-center justify-center space-y-3"
+                >
+                  <div
+                    class="p-3 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
+                  >
+                    <svg
+                      class="w-8 h-8"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="text-base font-medium text-gray-900 dark:text-white"
+                  >
+                    Nenhuma conta encontrada
+                  </div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 max-w-sm">
+                    <ng-container
+                      *ngIf="termoBuscaGlobal || filtroStatus !== 'todas'"
+                    >
+                      Nenhum registro corresponde aos filtros de busca
+                      aplicados.
+                    </ng-container>
+                    <ng-container
+                      *ngIf="!termoBuscaGlobal && filtroStatus === 'todas'"
+                    >
+                      Não há contas cadastradas no plano de contas.
+                    </ng-container>
+                  </p>
+                  <div class="pt-2 flex gap-3">
+                    <button
+                      *ngIf="termoBuscaGlobal || filtroStatus !== 'todas'"
+                      type="button"
+                      (click)="termoBuscaGlobal = ''; filtroStatus = 'todas'"
+                      class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 cursor-pointer"
+                    >
+                      Limpar filtros
+                    </button>
+                    <button
+                      type="button"
+                      (click)="cadastrar()"
+                      class="text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 px-3.5 py-1.5 rounded-lg hover:bg-indigo-100 transition cursor-pointer"
+                    >
+                      + Criar Nova Conta
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rodapé / Controles de Paginação -->
+      <div
+        class="bg-gray-50/80 dark:bg-gray-700/40 px-4 sm:px-6 py-4 border-t border-gray-200/80 dark:border-gray-700 flex flex-col sm:flex-row items-center justify-between gap-4"
+      >
+        <div class="text-xs text-gray-500 dark:text-gray-400">
+          Mostrando
+          <span class="font-semibold text-gray-700 dark:text-gray-200">{{
+            filteredContas.length
+          }}</span>
+          de
+          <span class="font-semibold text-gray-700 dark:text-gray-200">{{
+            contas.length
+          }}</span>
+          contas
+        </div>
+
+        <div class="flex justify-center">
+          <pagination-controls
+            previousLabel="Anterior"
+            nextLabel="Próximo"
+            (pageChange)="p = $event"
+            class="custom-pagination"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

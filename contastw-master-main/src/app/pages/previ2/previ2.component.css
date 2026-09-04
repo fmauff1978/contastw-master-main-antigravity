@@ -1,0 +1,26 @@
+::ng-deep .custom-pagination .ngx-pagination {
+  margin-bottom: 0 !important;
+  padding-left: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+}
+
+::ng-deep .custom-pagination .ngx-pagination li {
+  border-radius: 0.5rem !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+}
+
+::ng-deep .custom-pagination .ngx-pagination .current {
+  background: #7c3aed !important;
+  color: #ffffff !important;
+  border-radius: 0.5rem !important;
+  padding: 0.35rem 0.75rem !important;
+}
+
+::ng-deep .custom-pagination .ngx-pagination a:hover {
+  background: #f3e8ff !important;
+  color: #6b21a8 !important;
+  border-radius: 0.5rem !important;
+}

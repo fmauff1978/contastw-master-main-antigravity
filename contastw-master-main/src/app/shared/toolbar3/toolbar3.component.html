@@ -1,0 +1,387 @@
+<nav class="bg-gray-800">
+  <div class="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-center">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <!--
+            Icon when menu is closed.
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+          <svg
+            class="block size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+          <!--
+            Icon when menu is open.
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+          <svg
+            class="hidden size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+      >
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <a
+              href=""
+              class="rounded-md bg-red-900 px-3 py-2 text-xl font-medium text-white whitespace-nowrap"
+              aria-current="page"
+              >Resultado das Contas</a
+            >
+
+            <a
+              href="pl3"
+              class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 flex items-center hover:bg-gray-700 hover:text-white"
+              >Lançamentos</a
+            >
+
+            <a
+              id="dropdownNavbarLink"
+              data-dropdown-toggle="dropdownNavbar2"
+              class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center"
+              >Despesas
+              <svg
+                class="w-2.5 h-2.5 ms-2.5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </a>
+            <!-- Dropdown menu -->
+            <div
+              id="dropdownNavbar2"
+              class="z-10 hidden font-normal divide-y divide-gray-700 bg-gray-800"
+            >
+              <ul
+                class="py-2 text-sm text-gray-300"
+                aria-labelledby="dropdownLargeButton"
+              >
+                <li>
+                  <a
+                    href="calendar"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center bg-gray-800"
+                    >Calendário</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="mensal"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center bg-gray-800"
+                    >Mensal</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    href="mensal2026"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center bg-gray-800"
+                    >Mensal 2026</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    href="mensal2025"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center bg-gray-800"
+                    >Mensal 2025</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="mensal2024"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center bg-gray-800"
+                    >Mensal 2024</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <a
+              id="dropdownNavbarLink"
+              data-dropdown-toggle="dropdownNavbar3"
+              class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center"
+              >Agregados
+              <svg
+                class="w-2.5 h-2.5 ms-2.5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </a>
+            <!-- Dropdown menu -->
+            <div
+              id="dropdownNavbar3"
+              class="z-10 hidden font-normal divide-y divide-gray-700 bg-gray-800"
+            >
+              <ul
+                class="py-2 text-sm text-gray-300"
+                aria-labelledby="dropdownLargeButton"
+              >
+                <li>
+                  <a
+                    href="agregadoatual"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center bg-gray-800"
+                    >Agregados</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="agreg26"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center bg-gray-800"
+                    >Agreg2026</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    href="graf"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center bg-gray-800"
+                    >Agreg2025</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <a
+              href="parc2"
+              class="rounded-md px-3 py-2 flex items-center text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Parcelamentos</a
+            >
+            <a
+              href="previ2"
+              class="rounded-md px-3 py-2 flex items-center text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Previ</a
+            >
+            <a
+              href="agenda2"
+              class="rounded-md px-3 py-2 flex items-center text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Agenda</a
+            >
+            <a
+              id="dropdownNavbarLink2"
+              data-dropdown-toggle="dropdownNavbar4"
+              class="rounded-md px-3 py-2 flex items-center text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Gestão
+              <svg
+                class="w-2.5 h-2.5 ms-2.5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 4 4 4-4"
+                /></svg
+            ></a>
+            <div
+              id="dropdownNavbar4"
+              class="z-10 hidden font-normal divide-y divide-gray-700 bg-gray-800"
+            >
+              <ul
+                class="py-2 text-sm text-gray-300"
+                aria-labelledby="dropdownLargeButton"
+              >
+                <li>
+                  <a
+                    href="gestao"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 flex items-center bg-gray-800"
+                    >Contas</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="prov"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 flex items-center bg-gray-800"
+                    >Provisões Diversas</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="oc"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 flex items-center bg-gray-800"
+                    >Outros Credores</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="patr"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 flex items-center bg-gray-800"
+                    >Patrimônio</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    href="st2"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 flex items-center bg-gray-800"
+                    >ST Desp Receitas</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="st3"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 flex items-center bg-gray-800"
+                    >ST Ativo Passivo</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="up"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 flex items-center bg-gray-800"
+                    >Uploads</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="enc"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 flex items-center bg-gray-800"
+                    >Encerramento do Exercicio</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <a
+              href="sobre"
+              class="rounded-md px-3 py-2 flex items-center text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Sobre</a
+            >
+            <a
+              (click)="onLogout()"
+              class="rounded-md px-3 py-2 flex items-center text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >LogOut</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      >
+        <!-- Profile dropdown -->
+        <div class="relative ml-3">
+          <!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+      <a
+        href="#"
+        class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+        aria-current="page"
+      ></a>
+      <a
+        href="pl3"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Lançamentos</a
+      >
+      <a
+        href="anual2"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Despesas</a
+      >
+      <a
+        href="parc2"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Parcelamentos</a
+      >
+      <a
+        href="previ2"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Previ</a
+      >
+      <a
+        href="agenda2"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Agenda</a
+      >
+      <a
+        href="gestao"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Gestão</a
+      >
+      <a
+        href="#"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >Sobre</a
+      >
+      <a
+        href="logout"
+        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        >LogOut</a
+      >
+    </div>
+  </div>
+</nav>
